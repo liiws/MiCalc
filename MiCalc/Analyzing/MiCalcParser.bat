@@ -1,0 +1,1 @@
+gppg.exe /gplex /nolines /verbose MiCalcParser.y>MiCalcParser.cs

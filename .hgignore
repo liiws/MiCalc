@@ -1,0 +1,6 @@
+syntax: glob
+MiCalc.Tests/bin
+MiCalc.Tests/obj
+*.suo
+MiCalc/bin
+MiCalc/obj/Debug
