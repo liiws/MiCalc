@@ -37,12 +37,17 @@ namespace MiCalc
 
 		private void fMain_Load(object sender, EventArgs e)
 		{
+			// set form size limits
 			var defSize = new Size(_defWidth, Size.Height);
 			var minSize = new Size(_minWidth, Size.Height);
 			var maxSize = new Size(int.MaxValue, Size.Height);
 			Size = defSize;
 			MinimumSize = minSize;
 			MaximumSize = maxSize;
+
+			// hide caption
+			ControlBox = false;
+			Text = string.Empty;
 		}
 
 		private void rtbExpression_TextChanged(object sender, EventArgs e)
