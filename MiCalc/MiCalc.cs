@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Numerics;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using BigNum;
 using MiCalc.Properties;
@@ -28,6 +21,9 @@ namespace MiCalc
 		private int _minWidth = 400;
 		private int _defWidth = 710;
 
+		private bool _isWindowMoving = false;
+		private int _movingX;
+		private int _movingY;
 
 
 		public fMain()
@@ -37,6 +33,10 @@ namespace MiCalc
 
 		private void fMain_Load(object sender, EventArgs e)
 		{
+			// hide caption
+			ControlBox = false;
+			Text = string.Empty;
+
 			// set form size limits
 			var defSize = new Size(_defWidth, Size.Height);
 			var minSize = new Size(_minWidth, Size.Height);
@@ -45,9 +45,15 @@ namespace MiCalc
 			MinimumSize = minSize;
 			MaximumSize = maxSize;
 
-			// hide caption
-			ControlBox = false;
-			Text = string.Empty;
+			// set button images
+			ubClose.Image = Resources.icon_wnd_close.ToBitmap();
+			ubCopy.Image = Resources.icon_copy.ToBitmap();
+			ubDegrees.Image = Resources.icon_degrees.ToBitmap();
+			ubFunctions.Image = Resources.icon_functions.ToBitmap();
+			ubMinimize.Image = Resources.icon_wnd_min.ToBitmap();
+			ubOnTop.Image = Resources.icon_wnd_normal.ToBitmap();
+			ubPaste.Image = Resources.icon_paste.ToBitmap();
+			ubQuestion.Image = Resources.icon_question.ToBitmap();
 		}
 
 		private void rtbExpression_TextChanged(object sender, EventArgs e)
@@ -134,7 +140,6 @@ namespace MiCalc
 		{
 			if (result != null && errorMessage == null)
 			{
-				//MakeInputNormal();
 				tbDecimal.Text = CalcHelper.GetAsDecimal(result);
 				tbScience.Text = CalcHelper.GetAsScience(result);
 				tbHex.Text = CalcHelper.GetAsHex(result);
@@ -146,13 +151,77 @@ namespace MiCalc
 				{
 					errorMessage = "Error";
 				}
-				//MakeInputNormal();
 				MakeInputError(null);
 				tbDecimal.Text = errorMessage;
 				tbScience.Text = errorMessage;
 				tbHex.Text = errorMessage;
 				tbBin.Text = errorMessage;
 			}
+		}
+
+		private void fMain_MouseDown(object sender, MouseEventArgs e)
+		{
+			_isWindowMoving = true;
+			_movingX = e.X;
+			_movingY = e.Y;
+		}
+
+		private void fMain_MouseUp(object sender, MouseEventArgs e)
+		{
+			_isWindowMoving = false;
+		}
+
+		private void fMain_MouseMove(object sender, MouseEventArgs e)
+		{
+			if (!_isWindowMoving)
+			{
+				return;
+			}
+
+			Left += e.X - _movingX;
+			Top += e.Y - _movingY;
+		}
+
+		private void ubClose_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
+
+		private void ubMinimize_Click(object sender, EventArgs e)
+		{
+			WindowState = FormWindowState.Minimized;
+		}
+
+		private void ubQuestion_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void ubOnTop_Click(object sender, EventArgs e)
+		{
+			TopMost = !TopMost;
+			ubOnTop.Image = TopMost ? Resources.icon_wnd_ontop.ToBitmap() : Resources.icon_wnd_normal.ToBitmap();
+		}
+
+		private void ubCopy_Click(object sender, EventArgs e)
+		{
+			//tbDecimal.Text
+		}
+
+		private void ubPaste_Click(object sender, EventArgs e)
+		{
+			//rtbExpression.Text
+		}
+
+		private void ubDegrees_Click(object sender, EventArgs e)
+		{
+			CalcHelper.IsRadians = !CalcHelper.IsRadians;
+			ubDegrees.Image = CalcHelper.IsRadians ? Resources.icon_radians.ToBitmap() : Resources.icon_degrees.ToBitmap();
+		}
+
+		private void ubFunctions_Click(object sender, EventArgs e)
+		{
+
 		}
 
 	}

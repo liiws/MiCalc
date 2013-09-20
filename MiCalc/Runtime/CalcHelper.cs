@@ -12,6 +12,10 @@ namespace MiCalc.Runtime
 		private static BigFloat _one  = new BigFloat(1.0d, _precisionSpec);
 		private static BigFloat _ten  = new BigFloat(10.0d, _precisionSpec);
 
+
+		public static bool IsRadians = false;
+
+
 		public static BigFloat ParseNumber(string s)
 		{
 			return new BigFloat(s, _precisionSpec);

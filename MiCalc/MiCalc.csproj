@@ -56,6 +56,12 @@
   <ItemGroup>
     <Compile Include="Analyzing\MiCalcParser.cs" />
     <Compile Include="Analyzing\MiCalcScanner.cs" />
+    <Compile Include="Controls\UnfocusedButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\UnfocusedButton.Designer.cs">
+      <DependentUpon>UnfocusedButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="MiCalc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,6 +104,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\icon-wnd-ontop.ico" />
+    <None Include="Resources\icon-wnd-normal.ico" />
+    <None Include="Resources\icon-wnd-min.ico" />
+    <None Include="Resources\icon-wnd-close.ico" />
+    <None Include="Resources\icon-radians.ico" />
+    <None Include="Resources\icon-question.ico" />
+    <None Include="Resources\icon-paste.ico" />
+    <None Include="Resources\icon-functions.ico" />
+    <None Include="Resources\icon-degrees.ico" />
+    <None Include="Resources\icon-copy.ico" />
+    <None Include="Resources\_std_ico.ico" />
     <None Include="Resources\icon.ico" />
   </ItemGroup>
   <ItemGroup>

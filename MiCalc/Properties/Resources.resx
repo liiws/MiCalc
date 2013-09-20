@@ -121,4 +121,34 @@
   <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon_copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-copy.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_degrees" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-degrees.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_functions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-functions.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_paste" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-paste.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_question" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-question.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_radians" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-radians.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_wnd_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-wnd-close.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_wnd_min" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-wnd-min.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_wnd_normal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-wnd-normal.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_wnd_ontop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-wnd-ontop.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
