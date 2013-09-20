@@ -25,6 +25,9 @@ namespace MiCalc
 		private Color _fgColorError = Color.FromArgb(255, 32, 32);
 
 
+		private int _minWidth = 400;
+		private int _defWidth = 710;
+
 
 
 		public fMain()
@@ -34,116 +37,13 @@ namespace MiCalc
 
 		private void fMain_Load(object sender, EventArgs e)
 		{
-			//Icon = Resources.icon;
-
-			var result = string.Empty;
-
-			//var input = "1+2*3";
-			//var input = "floor(2.3)";
-			//var input = "(2+3)*4";
-			//var input = "170!";
-			//var input = "( 2 )";
-			//using (var ms = new System.IO.MemoryStream())
-			//{
-			//	var data = Encoding.UTF8.GetBytes(input);
-			//	ms.Write(data, 0, input.Length);
-			//	ms.Position = 0L;
-
-			//	var scanner = new Analyzing.Scanner(ms);
-			//	var parser = new Analyzing.Parser(scanner);
-			//	parser.Parse();
-
-			//	result = parser.expression.Calc().ToString();
-
-			//	rtbExpression.Text = result;
-
-			//	rtbExpression.Text = "abcdefgh";
-			//	rtbExpression.Select(1, 1);
-			//	rtbExpression.SelectionColor = Color.Red;
-			//	rtbExpression.SelectionFont = new Font(rtbExpression.SelectionFont, FontStyle.Bold);
-			//	rtbExpression.BackColor = Color.FromArgb(255, 225, 225);
-			//	rtbExpression.Select(1, 0);
-
-			//	rtbExpression.RichTextShortcutsEnabled = false;
-			//	//rtb1.
-			//}
-
-
-			//BigInteger bi = BigInteger.Parse(string.Join("", Enumerable.Repeat("5", 40000)));
-			//result = bi.ToString();
-			////BigInteger.
-			//IntXLib.IntX ix = new IntX("101");
-			//var ix2 = IntXLib.IntX.Pow(ix, 100);
-			//result = ix2.ToString();
-
-			//BigFloat bn = new BigNumDec("101.5");
-			////var bn2 = W3b.Sine.BigMath.Pow(bn, 100);
-			//var bn2 = BigFloatDec.Divide(new BigNumDec(bn.ToString()), new BigNumDec("3"));
-			////var bn2 = BigFloatDec.Pi;
-			//result = bn2.ToString();
-
-
-			double d1 = Math.Exp(5.5);
-			double d2 = Math.Exp(105.27);
-			double d3 = Math.Exp(-105.27);
-			double d4 = Math.Exp(1234567890.987);
-
-			//BigNum n1 = new BigNumDec("5.5");
-			//BigNum n2 = new BigNumDec("105.27");
-			//BigNum n3 = new BigNumDec("-105.27");
-			//BigNum n4 = new BigNumDec("1234567890.987");
-
-			//var sw = new Stopwatch();
-			//sw.Start();
-			//var q1 = CalcE(n2);
-			//var elapsed = sw.ElapsedMilliseconds;
-			//var q2 = double.Parse(q1.ToString()) - d2;
-
-			//MPCLI.Primality.
-
-			//var qwe = 1/BigInteger.Pow(new BigInteger(15), 10);
-
-
-			var q1 = BigFloat.RoundingMode;
-			var q2 = BigFloat.RoundingDigits;
-
-			var ps = new PrecisionSpec(128, new PrecisionSpec.BaseType());
-			var n2 = new BigFloat("105.123456789", ps);
-			//var n2 = new BN.BigFloat("105.27", ps);
-			var n2c = n2;
-			n2c.Exp();
-
-
-
-			//textBox1.Text = result;
-
-			var vrgvdgvdsg = 1;
+			var defSize = new Size(_defWidth, Size.Height);
+			var minSize = new Size(_minWidth, Size.Height);
+			var maxSize = new Size(int.MaxValue, Size.Height);
+			Size = defSize;
+			MinimumSize = minSize;
+			MaximumSize = maxSize;
 		}
-
-
-		//private BigFloat CalcE(BigFloat x)
-		//{
-		//	BigFloat result = new BigFloatDec(0);
-		//	x = x - 104;
-
-		//	BigFloat big = W3b.Sine.BigMath.Pow(CalcHelper.GetE(), 104);
-
-		//	result += 1;
-		//	result += x;
-
-		//	for (int n = 2; n < 20; n++)
-		//	{
-		//		var xToN = W3b.Sine.BigMath.Pow(x, n);
-		//		var xFac = new BigFloatDec("5.5");// BigMath.Factorial(new BigNumDec(n));
-		//		result += xToN/xFac;
-		//	}
-
-		//	return result*big;
-		//}
-
-
-
-
 
 		private void rtbExpression_TextChanged(object sender, EventArgs e)
 		{
@@ -249,5 +149,6 @@ namespace MiCalc
 				tbBin.Text = errorMessage;
 			}
 		}
+
 	}
 }

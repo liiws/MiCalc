@@ -156,7 +156,6 @@
 			this.Controls.Add(this.tbHex);
 			this.Controls.Add(this.tbScience);
 			this.Controls.Add(this.tbDecimal);
-			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.Icon = global::MiCalc.Properties.Resources.icon;
 			this.Name = "fMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
