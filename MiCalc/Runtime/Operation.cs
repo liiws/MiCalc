@@ -20,5 +20,7 @@ namespace MiCalc.Runtime
 		Or,
 		Not,
 		Xor,
+		Rsh,
+		Lsh,
 	}
 }

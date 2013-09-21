@@ -65,36 +65,39 @@
             "+ -",
             "Adding, substracting"}, -1);
 			System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem(new string[] {
+            ">> <<",
+            "Bitwise right and left shift (64 bit)"}, -1);
+			System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
             "pi",
             "Pi number"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
             "e",
             "E number"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
             "floor, ceil, round",
             "Rounding down, up, nearest"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
             "sin, cos, tan",
             "Sine, cosine, tangent"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem(new string[] {
             "sinh, cosh, tanh",
             "Hyperbolic sine, cosine, tangent"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem(new string[] {
             "asin, acos, atan",
             "Inverse of sine, cosine, tangent"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem(new string[] {
             "asinh, acosh, atanh",
             "Inverse of hyperbolic sine, cosine, tangent"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem(new string[] {
             "ln",
             "Natural lorarithm"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem(new string[] {
             "lg",
             "Logarithm to base 10"}, -1);
-			System.Windows.Forms.ListViewItem listViewItem21 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem(new string[] {
             "exp",
             "Exponent "}, -1);
-			System.Windows.Forms.ListViewItem listViewItem22 = new System.Windows.Forms.ListViewItem(new string[] {
+			System.Windows.Forms.ListViewItem listViewItem23 = new System.Windows.Forms.ListViewItem(new string[] {
             "sqrt",
             "Square root"}, -1);
 			this.btnOK = new System.Windows.Forms.Button();
@@ -151,9 +154,9 @@
 			listViewItem9.Group = listViewGroup1;
 			listViewItem10.Group = listViewGroup1;
 			listViewItem11.Group = listViewGroup1;
-			listViewItem12.Group = listViewGroup2;
+			listViewItem12.Group = listViewGroup1;
 			listViewItem13.Group = listViewGroup2;
-			listViewItem14.Group = listViewGroup3;
+			listViewItem14.Group = listViewGroup2;
 			listViewItem15.Group = listViewGroup3;
 			listViewItem16.Group = listViewGroup3;
 			listViewItem17.Group = listViewGroup3;
@@ -162,6 +165,7 @@
 			listViewItem20.Group = listViewGroup3;
 			listViewItem21.Group = listViewGroup3;
 			listViewItem22.Group = listViewGroup3;
+			listViewItem23.Group = listViewGroup3;
 			this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1,
             listViewItem2,
@@ -184,7 +188,8 @@
             listViewItem19,
             listViewItem20,
             listViewItem21,
-            listViewItem22});
+            listViewItem22,
+            listViewItem23});
 			this.listView1.Location = new System.Drawing.Point(12, 25);
 			this.listView1.Name = "listView1";
 			this.listView1.Size = new System.Drawing.Size(434, 530);

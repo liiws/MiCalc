@@ -40,6 +40,7 @@
 
 %token OP_RIGHT_PAR
 %token OP_LEFT_PAR
+%left OP_RSH OP_LSH
 %left OP_ADD OP_SUB
 %left OP_MUL OP_DIV
 %left OP_MOD
@@ -70,6 +71,8 @@ expr		: OP_LEFT_PAR expr OP_RIGHT_PAR { $$ = $2; }
 			| expr OP_OR expr { $$.expr = new Expression(Operation.Or, $1.expr, $3.expr); }
 			| OP_NOT expr { $$.expr = new Expression(Operation.Not, $2.expr, null); }
 			| expr OP_XOR expr { $$.expr = new Expression(Operation.Xor, $1.expr, $3.expr); }
+			| expr OP_RSH expr { $$.expr = new Expression(Operation.Rsh, $1.expr, $3.expr); }
+			| expr OP_LSH expr { $$.expr = new Expression(Operation.Lsh, $1.expr, $3.expr); }
 			| expr OP_FAC { $$.expr = new Expression(Operation.Fac, $1.expr, null); }
 			| OP_SUB expr %prec UMINUS { $$.expr.IsNegative = !$$.expr.IsNegative; }
 			| OP_ADD expr %prec UPLUS { ; }

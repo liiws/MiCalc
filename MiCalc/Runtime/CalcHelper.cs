@@ -193,6 +193,62 @@ namespace MiCalc.Runtime
 			return new BigFloat(BigInt.Xor(int1, int2).ToString(), _precisionSpec);
 		}
 
+		public static BigFloat Rsh(BigFloat n1, BigFloat n2)
+		{
+			if (n1.GreaterThan(_nLongUnsignedMax) || n2.GreaterThan(_nLongUnsignedMax))
+			{
+				throw new Exception("Error: bitwise operator for Number > Unsigned QWORD");
+			}
+			else if (n1.LessThan(_nLongSignedMin) || n2.LessThan(_nLongSignedMin))
+			{
+				throw new Exception("Error: bitwise operator for Number < Signed QWORD");
+			}
+			var int1 = BigFloat.ConvertToInt(Round(n1), _precisionSpec, false);
+			var int2 = BigFloat.ConvertToInt(Round(n2), _precisionSpec, false);
+
+			if (int1.Sign)
+			{
+				int1.Sign = false;
+				int1 = _nLongUnsignedMaxPlusOne - int1;
+			}
+			if (int2.Sign)
+			{
+				int2.Sign = false;
+				int2 = _nLongUnsignedMaxPlusOne - int2;
+			}
+
+			int1.RSH(int.Parse(int2.ToString()));
+			return new BigFloat(int1.ToString(), _precisionSpec);
+		}
+
+		public static BigFloat Lsh(BigFloat n1, BigFloat n2)
+		{
+			if (n1.GreaterThan(_nLongUnsignedMax) || n2.GreaterThan(_nLongUnsignedMax))
+			{
+				throw new Exception("Error: bitwise operator for Number > Unsigned QWORD");
+			}
+			else if (n1.LessThan(_nLongSignedMin) || n2.LessThan(_nLongSignedMin))
+			{
+				throw new Exception("Error: bitwise operator for Number < Signed QWORD");
+			}
+			var int1 = BigFloat.ConvertToInt(Round(n1), _precisionSpec, false);
+			var int2 = BigFloat.ConvertToInt(Round(n2), _precisionSpec, false);
+
+			if (int1.Sign)
+			{
+				int1.Sign = false;
+				int1 = _nLongUnsignedMaxPlusOne - int1;
+			}
+			if (int2.Sign)
+			{
+				int2.Sign = false;
+				int2 = _nLongUnsignedMaxPlusOne - int2;
+			}
+
+			int1.LSH(int.Parse(int2.ToString()));
+			return new BigFloat(int1.ToString(), _precisionSpec);
+		}
+
 		public static BigFloat Pow(BigFloat n1, BigFloat n2)
 		{
 			return BigFloat.Pow(n1, n2);

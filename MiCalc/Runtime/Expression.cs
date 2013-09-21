@@ -106,6 +106,14 @@ namespace MiCalc.Runtime
 			{
 				result = CalcHelper.Xor(Left.Calc(), Right.Calc());
 			}
+			else if (Operation == Operation.Rsh)
+			{
+				result = CalcHelper.Rsh(Left.Calc(), Right.Calc());
+			}
+			else if (Operation == Operation.Lsh)
+			{
+				result = CalcHelper.Lsh(Left.Calc(), Right.Calc());
+			}
 			else if (Operation == Operation.Pow)
 			{
 				result = CalcHelper.Pow(Left.Calc(), Right.Calc());

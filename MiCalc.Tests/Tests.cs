@@ -195,6 +195,22 @@ namespace MiCalc.Tests
 		}
 
 		[TestMethod]
+		public void Rsh()
+		{
+			var input = "2>>1";
+			var result = GetResult(input);
+			Assert.AreEqual(1, result);
+		}
+
+		[TestMethod]
+		public void Lsh()
+		{
+			var input = "2<<1";
+			var result = GetResult(input);
+			Assert.AreEqual(4, result);
+		}
+
+		[TestMethod]
 		public void Brackets()
 		{
 			var input = "(2+3)*4";
