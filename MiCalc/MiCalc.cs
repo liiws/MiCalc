@@ -270,7 +270,8 @@ namespace MiCalc
 
 		private void ubFunctions_Click(object sender, EventArgs e)
 		{
-
+			var form = new fFunctions();
+			form.ShowDialog();
 		}
 
 		private void rtbExpression_KeyPress(object sender, KeyPressEventArgs e)

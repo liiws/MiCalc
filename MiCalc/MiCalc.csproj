@@ -68,6 +68,12 @@
     <Compile Include="fAbout.designer.cs">
       <DependentUpon>fAbout.cs</DependentUpon>
     </Compile>
+    <Compile Include="fFunctions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fFunctions.Designer.cs">
+      <DependentUpon>fFunctions.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="MiCalc.cs">
       <SubType>Form</SubType>
@@ -86,6 +92,9 @@
     <Compile Include="Settings\Settings.cs" />
     <EmbeddedResource Include="fAbout.resx">
       <DependentUpon>fAbout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fFunctions.resx">
+      <DependentUpon>fFunctions.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MiCalc.resx">
       <DependentUpon>MiCalc.cs</DependentUpon>
