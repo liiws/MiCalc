@@ -61,6 +61,18 @@ namespace MiCalc
 			ubPaste.Image = Resources.icon_paste.ToBitmap();
 			ubQuestion.Image = Resources.icon_question.ToBitmap();
 
+			// tooltips
+			new ToolTip().SetToolTip(ubClose, "Close the program");
+			new ToolTip().SetToolTip(ubCopy, "Copy decimal result to clipboard");
+			new ToolTip().SetToolTip(ubDegrees, "Set trigonometric functions unit");
+			new ToolTip().SetToolTip(ubFunctions, "List of available functions and operators");
+			new ToolTip().SetToolTip(ubMinimize, "Minimize window");
+			new ToolTip().SetToolTip(ubOnTop, "Set always on top");
+			new ToolTip().SetToolTip(ubPaste, "Paste from clipboard");
+			new ToolTip().SetToolTip(ubQuestion, "About");
+			new ToolTip().SetToolTip(lHex, "64-bit signed hexadecimal value");
+			new ToolTip().SetToolTip(lBin, "64-bit signed binary value");
+
 			// restore calculation expression
 			rtbExpression.Text = Settings.Settings.GetCalculationExpression();
 		}

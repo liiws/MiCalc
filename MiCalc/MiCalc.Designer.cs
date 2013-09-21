@@ -28,10 +28,10 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.label2 = new System.Windows.Forms.Label();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label5 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
+			this.lDecimal = new System.Windows.Forms.Label();
+			this.lScience = new System.Windows.Forms.Label();
+			this.lHex = new System.Windows.Forms.Label();
+			this.lBin = new System.Windows.Forms.Label();
 			this.tbDecimal = new System.Windows.Forms.TextBox();
 			this.tbScience = new System.Windows.Forms.TextBox();
 			this.tbHex = new System.Windows.Forms.TextBox();
@@ -47,41 +47,41 @@
 			this.ubPaste = new MiCalc.Controls.UnfocusedButton();
 			this.SuspendLayout();
 			// 
-			// label2
+			// lDecimal
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(1, 79);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(48, 13);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "Decimal:";
+			this.lDecimal.AutoSize = true;
+			this.lDecimal.Location = new System.Drawing.Point(1, 79);
+			this.lDecimal.Name = "lDecimal";
+			this.lDecimal.Size = new System.Drawing.Size(48, 13);
+			this.lDecimal.TabIndex = 1;
+			this.lDecimal.Text = "Decimal:";
 			// 
-			// label3
+			// lScience
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(0, 105);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(49, 13);
-			this.label3.TabIndex = 1;
-			this.label3.Text = "Science:";
+			this.lScience.AutoSize = true;
+			this.lScience.Location = new System.Drawing.Point(0, 105);
+			this.lScience.Name = "lScience";
+			this.lScience.Size = new System.Drawing.Size(49, 13);
+			this.lScience.TabIndex = 1;
+			this.lScience.Text = "Science:";
 			// 
-			// label5
+			// lHex
 			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(0, 131);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(29, 13);
-			this.label5.TabIndex = 1;
-			this.label5.Text = "Hex:";
+			this.lHex.AutoSize = true;
+			this.lHex.Location = new System.Drawing.Point(0, 131);
+			this.lHex.Name = "lHex";
+			this.lHex.Size = new System.Drawing.Size(29, 13);
+			this.lHex.TabIndex = 1;
+			this.lHex.Text = "Hex:";
 			// 
-			// label4
+			// lBin
 			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(0, 157);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(25, 13);
-			this.label4.TabIndex = 1;
-			this.label4.Text = "Bin:";
+			this.lBin.AutoSize = true;
+			this.lBin.Location = new System.Drawing.Point(0, 157);
+			this.lBin.Name = "lBin";
+			this.lBin.Size = new System.Drawing.Size(25, 13);
+			this.lBin.TabIndex = 1;
+			this.lBin.Text = "Bin:";
 			// 
 			// tbDecimal
 			// 
@@ -256,10 +256,10 @@
 			this.Controls.Add(this.ubDegrees);
 			this.Controls.Add(this.ubPaste);
 			this.Controls.Add(this.rtbExpression);
-			this.Controls.Add(this.label4);
-			this.Controls.Add(this.label5);
-			this.Controls.Add(this.label3);
-			this.Controls.Add(this.label2);
+			this.Controls.Add(this.lBin);
+			this.Controls.Add(this.lHex);
+			this.Controls.Add(this.lScience);
+			this.Controls.Add(this.lDecimal);
 			this.Controls.Add(this.tbBin);
 			this.Controls.Add(this.tbHex);
 			this.Controls.Add(this.tbScience);
@@ -280,10 +280,10 @@
 
 		#endregion
 
-		private System.Windows.Forms.Label label2;
-		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label lDecimal;
+		private System.Windows.Forms.Label lScience;
+		private System.Windows.Forms.Label lHex;
+		private System.Windows.Forms.Label lBin;
 		private System.Windows.Forms.TextBox tbDecimal;
 		private System.Windows.Forms.TextBox tbScience;
 		private System.Windows.Forms.TextBox tbHex;
