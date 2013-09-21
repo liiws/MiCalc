@@ -268,6 +268,7 @@
 			this.Name = "fMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "MiCalc";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.fMain_FormClosed);
 			this.Load += new System.EventHandler(this.fMain_Load);
 			this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.fMain_MouseDown);
 			this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.fMain_MouseMove);

@@ -76,6 +76,7 @@
     <Compile Include="Runtime\Expression.cs" />
     <Compile Include="Runtime\Operation.cs" />
     <Compile Include="Runtime\Scanner.cs" />
+    <Compile Include="Settings\Settings.cs" />
     <EmbeddedResource Include="MiCalc.resx">
       <DependentUpon>MiCalc.cs</DependentUpon>
     </EmbeddedResource>

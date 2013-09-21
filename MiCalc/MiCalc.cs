@@ -19,7 +19,6 @@ namespace MiCalc
 
 
 		private int _minWidth = 400;
-		private int _defWidth = 710;
 
 		private bool _isWindowMoving = false;
 		private int _movingX;
@@ -29,6 +28,8 @@ namespace MiCalc
 		public fMain()
 		{
 			InitializeComponent();
+
+			Settings.Settings.LoadSettings();
 		}
 
 		private void fMain_Load(object sender, EventArgs e)
@@ -37,11 +38,17 @@ namespace MiCalc
 			ControlBox = false;
 			Text = string.Empty;
 
+			// restore window position
+			Location = Settings.Settings.GetWindowPosition();
+
+			// restore window size
+			Size = new Size(Settings.Settings.GetWindowSize().Width, Size.Height);
+
 			// set form size limits
-			var defSize = new Size(_defWidth, Size.Height);
+			//var defSize = new Size(_defWidth, Size.Height);
 			var minSize = new Size(_minWidth, Size.Height);
 			var maxSize = new Size(int.MaxValue, Size.Height);
-			Size = defSize;
+			//Size = defSize;
 			MinimumSize = minSize;
 			MaximumSize = maxSize;
 
@@ -55,8 +62,8 @@ namespace MiCalc
 			ubPaste.Image = Resources.icon_paste.ToBitmap();
 			ubQuestion.Image = Resources.icon_question.ToBitmap();
 
-
-			CalcResult();
+			// restore calculation expression
+			rtbExpression.Text = Settings.Settings.GetCalculationExpression();
 		}
 
 		private void rtbExpression_TextChanged(object sender, EventArgs e)
@@ -242,5 +249,13 @@ namespace MiCalc
 			}
 		}
 
+		private void fMain_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			Settings.Settings.SetWindowLocation(Location);
+			Settings.Settings.SetWindowSize(Size);
+			Settings.Settings.SetCalculationExpression(rtbExpression.Text);
+
+			Settings.Settings.SaveSettings();
+		}
 	}
 }
