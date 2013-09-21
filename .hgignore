@@ -4,3 +4,4 @@ MiCalc.Tests/obj
 *.suo
 MiCalc/bin
 MiCalc/obj/Debug
+MiCalc.sln.DotSettings.user

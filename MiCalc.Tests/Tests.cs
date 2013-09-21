@@ -8,7 +8,15 @@ namespace MiCalc.Tests
 	[TestClass]
 	public class UnitTest1
 	{
+		private double _maxError = 1.0e-10;
+
+
 		private double GetResult(string expression)
+		{
+			return double.Parse(GetResultAsBigFloat(expression).ToString());
+		}
+
+		private BigFloat GetResultAsBigFloat(string expression)
 		{
 			using (var ms = new System.IO.MemoryStream())
 			{
@@ -22,7 +30,7 @@ namespace MiCalc.Tests
 
 				var result = parser.expression.Calc();
 
-				return double.Parse(result.ToString());
+				return result;
 			}
 		}
 
@@ -207,7 +215,7 @@ namespace MiCalc.Tests
 		{
 			var input = "floor(2.3)";
 			var result = GetResult(input);
-			Assert.AreEqual(2, result);
+			Assert.AreEqual(2.0, result);
 		}
 
 		[TestMethod]
@@ -215,7 +223,39 @@ namespace MiCalc.Tests
 		{
 			var input = "floor(2.7)";
 			var result = GetResult(input);
-			Assert.AreEqual(2, result);
+			Assert.AreEqual(2.0, result);
+		}
+
+		[TestMethod]
+		public void Floor3()
+		{
+			var input = "floor(-2.3)";
+			var result = GetResult(input);
+			Assert.AreEqual(-3.0, result);
+		}
+
+		[TestMethod]
+		public void Floor4()
+		{
+			var input = "floor(-2.7)";
+			var result = GetResult(input);
+			Assert.AreEqual(-3.0, result);
+		}
+
+		[TestMethod]
+		public void Floor5()
+		{
+			var input = "floor(1)";
+			var result = GetResult(input);
+			Assert.AreEqual(1.0, result);
+		}
+
+		[TestMethod]
+		public void Floor6()
+		{
+			var input = "floor(-1)";
+			var result = GetResult(input);
+			Assert.AreEqual(-1.0, result);
 		}
 
 		[TestMethod]
@@ -223,7 +263,7 @@ namespace MiCalc.Tests
 		{
 			var input = "ceil(2.3)";
 			var result = GetResult(input);
-			Assert.AreEqual(3, result);
+			Assert.AreEqual(3.0, result);
 		}
 
 		[TestMethod]
@@ -231,7 +271,39 @@ namespace MiCalc.Tests
 		{
 			var input = "ceil(2.7)";
 			var result = GetResult(input);
-			Assert.AreEqual(3, result);
+			Assert.AreEqual(3.0, result);
+		}
+
+		[TestMethod]
+		public void Ceil3()
+		{
+			var input = "ceil(-2.3)";
+			var result = GetResult(input);
+			Assert.AreEqual(-2.0, result);
+		}
+
+		[TestMethod]
+		public void Ceil4()
+		{
+			var input = "ceil(-2.7)";
+			var result = GetResult(input);
+			Assert.AreEqual(-2.0, result);
+		}
+
+		[TestMethod]
+		public void Ceil5()
+		{
+			var input = "ceil(1)";
+			var result = GetResult(input);
+			Assert.AreEqual(1.0, result);
+		}
+
+		[TestMethod]
+		public void Ceil6()
+		{
+			var input = "ceil(-1)";
+			var result = GetResult(input);
+			Assert.AreEqual(-1.0, result);
 		}
 
 		[TestMethod]
@@ -239,7 +311,7 @@ namespace MiCalc.Tests
 		{
 			var input = "round(2.3)";
 			var result = GetResult(input);
-			Assert.AreEqual(2, result);
+			Assert.AreEqual(2.0, result);
 		}
 
 		[TestMethod]
@@ -247,7 +319,39 @@ namespace MiCalc.Tests
 		{
 			var input = "round(2.7)";
 			var result = GetResult(input);
-			Assert.AreEqual(3, result);
+			Assert.AreEqual(3.0, result);
+		}
+
+		[TestMethod]
+		public void Round3()
+		{
+			var input = "round(-2.3)";
+			var result = GetResult(input);
+			Assert.AreEqual(-2.0, result);
+		}
+
+		[TestMethod]
+		public void Round4()
+		{
+			var input = "round(-2.7)";
+			var result = GetResult(input);
+			Assert.AreEqual(-3.0, result);
+		}
+
+		[TestMethod]
+		public void Round5()
+		{
+			var input = "round(1)";
+			var result = GetResult(input);
+			Assert.AreEqual(1.0, result);
+		}
+
+		[TestMethod]
+		public void Round6()
+		{
+			var input = "round(-1)";
+			var result = GetResult(input);
+			Assert.AreEqual(-1.0, result);
 		}
 
 		[TestMethod]
@@ -264,6 +368,287 @@ namespace MiCalc.Tests
 			var input = "4!";
 			var result = GetResult(input);
 			Assert.AreEqual(1*2*3*4, result);
+		}
+
+		[TestMethod]
+		public void Sin1()
+		{
+			var input = "sin(30)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(0.5 - result) < _maxError);
+			Assert.AreEqual(0.5, result);
+		}
+
+		[TestMethod]
+		public void Sin2()
+		{
+			var input = "sin(60)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(Math.Sin(Math.PI*60.0/180.0) - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Sin3()
+		{
+			var input = "sin(90)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(1.0 - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Cos1()
+		{
+			var input = "cos(30)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(Math.Cos(Math.PI*30.0/180.0) - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Cos2()
+		{
+			var input = "cos(60)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(0.5 - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Cos3()
+		{
+			var input = "cos(90)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(0.0 - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Tan1()
+		{
+			var input = "tan(45)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(1.0 - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Asin1()
+		{
+			var input = "asin(0.5)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(30.0 - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Acos1()
+		{
+			var input = "acos(0.5)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(60.0 - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Atan1()
+		{
+			var input = "atan(1)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(45.0 - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Sinh1()
+		{
+			var input = "sinh(1)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Sinh(Math.Sinh(1) - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Cosh1()
+		{
+			var input = "cosh(1)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(Math.Cosh(1) - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Tanh1()
+		{
+			var input = "tanh(1)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(Math.Tanh(1) - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Asinh1()
+		{
+			var input = "asinh(2)";
+			var result = GetResult(input);
+			var expected = Math.Log(2 + Math.Sqrt(2*2 + 1));
+			Assert.IsTrue(Math.Abs(expected - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Acosh1()
+		{
+			var input = "acosh(2)";
+			var result = GetResult(input);
+			var expected = Math.Log(2 + Math.Sqrt(2*2 - 1));
+			Assert.IsTrue(Math.Abs(expected - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Atanh1()
+		{
+			var input = "atanh(0.5)";
+			var result = GetResult(input);
+			var expected = Math.Log(Math.Sqrt((1.0+0.5)/(1.0-0.5)));
+			Assert.IsTrue(Math.Abs(expected - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Ln1()
+		{
+			var input = "ln(5)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(Math.Log(5) - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Lg1()
+		{
+			var input = "lg(5)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(Math.Log10(5) - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Exp1()
+		{
+			var input = "exp(5)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(Math.Exp(5) - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void Sqrt1()
+		{
+			var input = "sqrt(5)";
+			var result = GetResult(input);
+			Assert.IsTrue(Math.Abs(Math.Sqrt(5) - result) < _maxError);
+		}
+
+		[TestMethod]
+		public void GetAsDecimal1()
+		{
+			var input = "123";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsDecimal(result);
+			Assert.AreEqual("123", s);
+		}
+
+		[TestMethod]
+		public void GetAsDecimal2()
+		{
+			var input = "-123";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsDecimal(result);
+			Assert.AreEqual("-123", s);
+		}
+
+		[TestMethod]
+		public void GetAsDecimal3()
+		{
+			var input = "123.456";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsDecimal(result);
+			Assert.AreEqual("123.456", s);
+		}
+
+		[TestMethod]
+		public void GetAsDecimal4()
+		{
+			var input = "-123.456";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsDecimal(result);
+			Assert.AreEqual("-123.456", s);
+		}
+
+		[TestMethod]
+		public void GetAsDecimal5()
+		{
+			var input = "0.123";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsDecimal(result);
+			Assert.AreEqual("0.123", s);
+		}
+
+		[TestMethod]
+		public void GetAsDecimal6()
+		{
+			var input = "-0.123";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsDecimal(result);
+			Assert.AreEqual("-0.123", s);
+		}
+
+		[TestMethod]
+		public void GetAsScience1()
+		{
+			var input = "123";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("1.23e2", s);
+		}
+
+		[TestMethod]
+		public void GetAsScience2()
+		{
+			var input = "-123";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("-1.23e2", s);
+		}
+
+		[TestMethod]
+		public void GetAsScience3()
+		{
+			var input = "123.456";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("1.23456e2", s);
+		}
+
+		[TestMethod]
+		public void GetAsScience4()
+		{
+			var input = "-123.456";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("-1.23456e2", s);
+		}
+
+		[TestMethod]
+		public void GetAsScience5()
+		{
+			var input = "0.123";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("1.23e-1", s);
+		}
+
+		[TestMethod]
+		public void GetAsScience6()
+		{
+			var input = "-0.123";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("-1.23e-1", s);
+		}
+
+		[TestMethod]
+		public void GetAsHex1()
+		{
+			var input = "-0.123";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsHex(result);
+			Assert.AreEqual("-1.23e-1", s);
 		}
 	}
 }

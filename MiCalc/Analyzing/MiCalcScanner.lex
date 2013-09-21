@@ -34,6 +34,22 @@ ConstE		"e"
 FuncFloor	"floor"
 FuncCeil	"ceil"
 FuncRound	"round"
+FuncSin		"sin"
+FuncCos		"cos"
+FuncTan		"tan"
+FuncAsin	"asin"
+FuncAcos	"acos"
+FuncAtan	"atan"
+FuncSinh	"sinh"
+FuncCosh	"cosh"
+FuncTanh	"tanh"
+FuncAsinh	"asinh"
+FuncAcosh	"acosh"
+FuncAtanh	"atanh"
+FuncLn		"ln"
+FuncLg		"lg"
+FuncExp		"exp"
+FuncSqrt	"sqrt"
 
 
 
@@ -68,3 +84,19 @@ FuncRound	"round"
 {FuncFloor}	{ return (int) Tokens.FUNC_FLOOR; }
 {FuncCeil}	{ return (int) Tokens.FUNC_CEIL; }
 {FuncRound}	{ return (int) Tokens.FUNC_ROUND; }
+{FuncSin}	{ return (int) Tokens.FUNC_SIN; }
+{FuncCos}	{ return (int) Tokens.FUNC_COS; }
+{FuncTan}	{ return (int) Tokens.FUNC_TAN; }
+{FuncAsin}	{ return (int) Tokens.FUNC_ASIN; }
+{FuncAcos}	{ return (int) Tokens.FUNC_ACOS; }
+{FuncAtan}	{ return (int) Tokens.FUNC_ATAN; }
+{FuncSinh}	{ return (int) Tokens.FUNC_SINH; }
+{FuncCosh}	{ return (int) Tokens.FUNC_COSH; }
+{FuncTanh}	{ return (int) Tokens.FUNC_TANG; }
+{FuncAsinh}	{ return (int) Tokens.FUNC_ASINH; }
+{FuncAcosh}	{ return (int) Tokens.FUNC_ACOSH; }
+{FuncAtanh}	{ return (int) Tokens.FUNC_ATANH; }
+{FuncLn}	{ return (int) Tokens.FUNC_LN; }
+{FuncLg}	{ return (int) Tokens.FUNC_LG; }
+{FuncExp}	{ return (int) Tokens.FUNC_EXP; }
+{FuncSqrt}	{ return (int) Tokens.FUNC_SQRT; }

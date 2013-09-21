@@ -54,9 +54,17 @@ namespace MiCalc
 			ubOnTop.Image = Resources.icon_wnd_normal.ToBitmap();
 			ubPaste.Image = Resources.icon_paste.ToBitmap();
 			ubQuestion.Image = Resources.icon_question.ToBitmap();
+
+
+			CalcResult();
 		}
 
 		private void rtbExpression_TextChanged(object sender, EventArgs e)
+		{
+			CalcResult();
+		}
+
+		private void CalcResult()
 		{
 			MakeInputNormal();
 
@@ -217,11 +225,21 @@ namespace MiCalc
 		{
 			CalcHelper.IsRadians = !CalcHelper.IsRadians;
 			ubDegrees.Image = CalcHelper.IsRadians ? Resources.icon_radians.ToBitmap() : Resources.icon_degrees.ToBitmap();
+			CalcResult();
 		}
 
 		private void ubFunctions_Click(object sender, EventArgs e)
 		{
 
+		}
+
+		private void rtbExpression_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Escape)
+			{
+				rtbExpression.Text = string.Empty;
+				e.Handled = true;
+			}
 		}
 
 	}

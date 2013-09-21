@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MiCalc.Runtime
+﻿namespace MiCalc.Runtime
 {
 	public enum Function
 	{
@@ -12,5 +6,21 @@ namespace MiCalc.Runtime
 		Floor,
 		Ceil,
 		Round,
+		Sin,
+		Cos,
+		Tan,
+		Asin,
+		Acos,
+		Atan,
+		Sinh,
+		Cosh,
+		Tanh,
+		Asinh,
+		Acosh,
+		Atanh,
+		Ln,
+		Lg,
+		Exp,
+		Sqrt,
 	}
 }

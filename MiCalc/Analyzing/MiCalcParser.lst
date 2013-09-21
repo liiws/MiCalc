@@ -1,10 +1,10 @@
 
 // ==========================================================================
-//  GPPG error listing for yacc source file <MiCalcParser.y - 10.09.2013 0:52:23>
+//  GPPG error listing for yacc source file <MiCalcParser.y - 21.09.2013 15:00:18>
 // ==========================================================================
 //  Version:  1.5.0
 //  Machine:  LGT-PC
-//  DateTime: 10.09.2013 0:52:24
+//  DateTime: 21.09.2013 15:00:36
 //  UserName: lgt
 // ==========================================================================
 
@@ -39,17 +39,65 @@
 %left OP_MUL OP_DIV
 %left OP_MOD
 %left OP_POW
+%left OP_FAC
 %left UMINUS UPLUS
 
 
 // YACC Rules
 %%
-// Error: NonTerminal symbol "OP_FAC" has no productions
-// Warning: Terminating OP_FAC fixes the following size-1 NonTerminal set
-   // {OP_FAC}
-// Error: There are 1 non-terminating NonTerminal Symbols
-   //  {OP_FAC}
-// ----------------------------------------------------------------------
+// Error: NonTerminal symbol "FUNC_ATAN" has no productions
+// Error: NonTerminal symbol "FUNC_ACOS" has no productions
+// Error: NonTerminal symbol "FUNC_COSH" has no productions
+// Error: NonTerminal symbol "FUNC_SINH" has no productions
+// Error: NonTerminal symbol "FUNC_COS" has no productions
+// Error: NonTerminal symbol "FUNC_SIN" has no productions
+// Error: NonTerminal symbol "FUNC_ASIN" has no productions
+// Error: NonTerminal symbol "FUNC_TAN" has no productions
+// Error: NonTerminal symbol "FUNC_LG" has no productions
+// Error: NonTerminal symbol "FUNC_LN" has no productions
+// Error: NonTerminal symbol "FUNC_SQRT" has no productions
+// Error: NonTerminal symbol "FUNC_EXP" has no productions
+// Error: NonTerminal symbol "FUNC_ASINH" has no productions
+// Error: NonTerminal symbol "FUNC_TANG" has no productions
+// Error: NonTerminal symbol "FUNC_ATANH" has no productions
+// Error: NonTerminal symbol "FUNC_ACOSH" has no productions
+// Warning: Terminating FUNC_SQRT fixes the following size-1 NonTerminal set
+   // {FUNC_SQRT}
+// Warning: Terminating FUNC_ACOS fixes the following size-1 NonTerminal set
+   // {FUNC_ACOS}
+// Warning: Terminating FUNC_ASIN fixes the following size-1 NonTerminal set
+   // {FUNC_ASIN}
+// Warning: Terminating FUNC_SINH fixes the following size-1 NonTerminal set
+   // {FUNC_SINH}
+// Warning: Terminating FUNC_ATAN fixes the following size-1 NonTerminal set
+   // {FUNC_ATAN}
+// Warning: Terminating FUNC_SIN fixes the following size-1 NonTerminal set
+   // {FUNC_SIN}
+// Error: There are 16 non-terminating NonTerminal Symbols
+   //  {FUNC_SIN, FUNC_COS, FUNC_TAN, FUNC_ASIN, FUNC_ACOS, FUNC_ATAN, FUNC_SINH, 
+   //     FUNC_COSH, FUNC_TANG, FUNC_ASINH, FUNC_ACOSH, FUNC_ATANH, FUNC_LN, 
+   //     FUNC_LG, FUNC_EXP, FUNC_SQRT}
+// Warning: Terminating FUNC_TAN fixes the following size-1 NonTerminal set
+   // {FUNC_TAN}
+// Warning: Terminating FUNC_COS fixes the following size-1 NonTerminal set
+   // {FUNC_COS}
+// Warning: Terminating FUNC_LN fixes the following size-1 NonTerminal set
+   // {FUNC_LN}
+// Warning: Terminating FUNC_ATANH fixes the following size-1 NonTerminal set
+   // {FUNC_ATANH}
+// Warning: Terminating FUNC_EXP fixes the following size-1 NonTerminal set
+   // {FUNC_EXP}
+// Warning: Terminating FUNC_LG fixes the following size-1 NonTerminal set
+   // {FUNC_LG}
+// Warning: Terminating FUNC_TANG fixes the following size-1 NonTerminal set
+   // {FUNC_TANG}
+// Warning: Terminating FUNC_COSH fixes the following size-1 NonTerminal set
+   // {FUNC_COSH}
+// Warning: Terminating FUNC_ACOSH fixes the following size-1 NonTerminal set
+   // {FUNC_ACOSH}
+// Warning: Terminating FUNC_ASINH fixes the following size-1 NonTerminal set
+   // {FUNC_ASINH}
+// -------------------------------------------------------------------------------
 expression	: expr { expression = $1.expr; }
 			;
 
@@ -70,6 +118,22 @@ expr		: OP_LEFT_PAR expr OP_RIGHT_PAR { $$ = $2; }
 func		: FUNC_FLOOR OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Floor, $3.expr); }
 			| FUNC_CEIL OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Ceil, $3.expr); }
 			| FUNC_ROUND OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Round, $3.expr); }
+			| FUNC_SIN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Sin, $3.expr); }
+			| FUNC_COS OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Cos, $3.expr); }
+			| FUNC_TAN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Tan, $3.expr); }
+			| FUNC_ASIN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Asin, $3.expr); }
+			| FUNC_ACOS OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Acos, $3.expr); }
+			| FUNC_ATAN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Atan, $3.expr); }
+			| FUNC_SINH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Sinh, $3.expr); }
+			| FUNC_COSH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Cosh, $3.expr); }
+			| FUNC_TANG OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Tanh, $3.expr); }
+			| FUNC_ASINH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Asinh, $3.expr); }
+			| FUNC_ACOSH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Acosh, $3.expr); }
+			| FUNC_ATANH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Atanh, $3.expr); }
+			| FUNC_LN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Ln, $3.expr); }
+			| FUNC_LG OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Lg, $3.expr); }
+			| FUNC_EXP OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Exp, $3.expr); }
+			| FUNC_SQRT OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Sqrt, $3.expr); }
 			;
 
 stat		: NUMBER { $$.expr = new Expression($1); }

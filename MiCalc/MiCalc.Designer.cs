@@ -149,6 +149,7 @@
 			this.rtbExpression.Text = "";
 			this.rtbExpression.WordWrap = false;
 			this.rtbExpression.TextChanged += new System.EventHandler(this.rtbExpression_TextChanged);
+			this.rtbExpression.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.rtbExpression_KeyPress);
 			// 
 			// ubClose
 			// 

@@ -122,6 +122,70 @@ namespace MiCalc.Runtime
 			{
 				result = CalcHelper.Round(Left.Calc());
 			}
+			else if (Function == Function.Sin)
+			{
+				result = CalcHelper.Sin(Left.Calc());
+			}
+			else if (Function == Function.Cos)
+			{
+				result = CalcHelper.Cos(Left.Calc());
+			}
+			else if (Function == Function.Tan)
+			{
+				result = CalcHelper.Tan(Left.Calc());
+			}
+			else if (Function == Function.Asin)
+			{
+				result = CalcHelper.Asin(Left.Calc());
+			}
+			else if (Function == Function.Acos)
+			{
+				result = CalcHelper.Acos(Left.Calc());
+			}
+			else if (Function == Function.Atan)
+			{
+				result = CalcHelper.Atan(Left.Calc());
+			}
+			else if (Function == Function.Sinh)
+			{
+				result = CalcHelper.Sinh(Left.Calc());
+			}
+			else if (Function == Function.Cosh)
+			{
+				result = CalcHelper.Cosh(Left.Calc());
+			}
+			else if (Function == Function.Tanh)
+			{
+				result = CalcHelper.Tanh(Left.Calc());
+			}
+			else if (Function == Function.Asinh)
+			{
+				result = CalcHelper.Asinh(Left.Calc());
+			}
+			else if (Function == Function.Acosh)
+			{
+				result = CalcHelper.Acosh(Left.Calc());
+			}
+			else if (Function == Function.Atanh)
+			{
+				result = CalcHelper.Atanh(Left.Calc());
+			}
+			else if (Function == Function.Ln)
+			{
+				result = CalcHelper.Ln(Left.Calc());
+			}
+			else if (Function == Function.Lg)
+			{
+				result = CalcHelper.Lg(Left.Calc());
+			}
+			else if (Function == Function.Exp)
+			{
+				result = CalcHelper.Exp(Left.Calc());
+			}
+			else if (Function == Function.Sqrt)
+			{
+				result = CalcHelper.Sqrt(Left.Calc());
+			}
 
 			// error
 			else

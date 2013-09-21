@@ -21,6 +21,22 @@
 %token FUNC_FLOOR
 %token FUNC_CEIL
 %token FUNC_ROUND
+%token FUNC_SIN
+%token FUNC_COS
+%token FUNC_TAN
+%token FUNC_ASIN
+%token FUNC_ACOS
+%token FUNC_ATAN
+%token FUNC_SINH
+%token FUNC_COSH
+%token FUNC_TANG
+%token FUNC_ASINH
+%token FUNC_ACOSH
+%token FUNC_ATANH
+%token FUNC_LN
+%token FUNC_LG
+%token FUNC_EXP
+%token FUNC_SQRT
 
 %token OP_RIGHT_PAR
 %token OP_LEFT_PAR
@@ -54,6 +70,22 @@ expr		: OP_LEFT_PAR expr OP_RIGHT_PAR { $$ = $2; }
 func		: FUNC_FLOOR OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Floor, $3.expr); }
 			| FUNC_CEIL OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Ceil, $3.expr); }
 			| FUNC_ROUND OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Round, $3.expr); }
+			| FUNC_SIN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Sin, $3.expr); }
+			| FUNC_COS OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Cos, $3.expr); }
+			| FUNC_TAN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Tan, $3.expr); }
+			| FUNC_ASIN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Asin, $3.expr); }
+			| FUNC_ACOS OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Acos, $3.expr); }
+			| FUNC_ATAN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Atan, $3.expr); }
+			| FUNC_SINH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Sinh, $3.expr); }
+			| FUNC_COSH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Cosh, $3.expr); }
+			| FUNC_TANG OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Tanh, $3.expr); }
+			| FUNC_ASINH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Asinh, $3.expr); }
+			| FUNC_ACOSH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Acosh, $3.expr); }
+			| FUNC_ATANH OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Atanh, $3.expr); }
+			| FUNC_LN OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Ln, $3.expr); }
+			| FUNC_LG OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Lg, $3.expr); }
+			| FUNC_EXP OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Exp, $3.expr); }
+			| FUNC_SQRT OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Function.Sqrt, $3.expr); }
 			;
 
 stat		: NUMBER { $$.expr = new Expression($1); }
