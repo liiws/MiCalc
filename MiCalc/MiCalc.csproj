@@ -62,6 +62,13 @@
     <Compile Include="Controls\UnfocusedButton.Designer.cs">
       <DependentUpon>UnfocusedButton.cs</DependentUpon>
     </Compile>
+    <Compile Include="fAbout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fAbout.designer.cs">
+      <DependentUpon>fAbout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AppHelper.cs" />
     <Compile Include="MiCalc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +84,9 @@
     <Compile Include="Runtime\Operation.cs" />
     <Compile Include="Runtime\Scanner.cs" />
     <Compile Include="Settings\Settings.cs" />
+    <EmbeddedResource Include="fAbout.resx">
+      <DependentUpon>fAbout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MiCalc.resx">
       <DependentUpon>MiCalc.cs</DependentUpon>
     </EmbeddedResource>

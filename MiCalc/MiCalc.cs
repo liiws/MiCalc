@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using BigNum;
+using MiCalc.Forms;
 using MiCalc.Properties;
 using MiCalc.Runtime;
 
@@ -207,7 +208,8 @@ namespace MiCalc
 
 		private void ubQuestion_Click(object sender, EventArgs e)
 		{
-
+			var form = new fAbout();
+			form.ShowDialog();
 		}
 
 		private void ubOnTop_Click(object sender, EventArgs e)
