@@ -5,23 +5,35 @@ namespace MiCalc.Runtime
 {
 	public static class CalcHelper
 	{
-		private static PrecisionSpec _precisionSpecDec = new PrecisionSpec(256, PrecisionSpec.BaseType.DEC);
+		private static int _roundingDigits = 100;
+		private static PrecisionSpec _precisionSpec = new PrecisionSpec(250, PrecisionSpec.BaseType.DEC);
 
-		private static BigFloat _pi = BigFloat.GetPi(_precisionSpecDec);
-		private static BigFloat _e = BigFloat.GetE(_precisionSpecDec);
-		private static BigFloat _zero = new BigFloat(0.0d, _precisionSpecDec);
-		private static BigFloat _half = new BigFloat(0.5d, _precisionSpecDec);
-		private static BigFloat _one = new BigFloat(1.0d, _precisionSpecDec);
-		private static BigFloat _ten = new BigFloat(10.0d, _precisionSpecDec);
-		private static BigFloat _n180 = new BigFloat(180.0d, _precisionSpecDec);
+		private static BigFloat _pi = BigFloat.GetPi(_precisionSpec);
+		private static BigFloat _e = BigFloat.GetE(_precisionSpec);
+		private static BigFloat _zero = new BigFloat(0.0d, _precisionSpec);
+		private static BigFloat _half = new BigFloat(0.5d, _precisionSpec);
+		private static BigFloat _one = new BigFloat(1.0d, _precisionSpec);
+		private static BigFloat _ten = new BigFloat(10.0d, _precisionSpec);
+		private static BigFloat _n180 = new BigFloat(180.0d, _precisionSpec);
+		private static BigFloat _nLongUnsignedMax = new BigFloat("18446744073709551615", _precisionSpec);
+		private static BigFloat _nLongSignedMin = new BigFloat("-9223372036854775808", _precisionSpec);
+		private static BigInt _nLongUnsignedMaxPlusOne = new BigInt("18446744073709551616", _precisionSpec);
 
 
 		public static bool IsRadians = false;
 
 
+
+		static CalcHelper()
+		{
+			BigFloat.RoundingDigits = _roundingDigits;
+		}
+
+
+
 		public static BigFloat ParseNumber(string s)
 		{
-			return new BigFloat(s, _precisionSpecDec);
+			return new BigFloat(s, _precisionSpec);
 		}
 
 		public static BigFloat ChangeSign(BigFloat n)
@@ -84,9 +96,9 @@ namespace MiCalc.Runtime
 
 		public static BigFloat Fac(BigFloat n)
 		{
-			var fac = BigFloat.ConvertToInt(n, _precisionSpecDec, false);
+			var fac = BigFloat.ConvertToInt(Round(n), _precisionSpec, false);
 			fac.Factorial();
-			return new BigFloat(fac, _precisionSpecDec);
+			return new BigFloat(fac.ToString(), _precisionSpec);
 		}
 
 		public static BigFloat Floor(BigFloat n)
@@ -233,37 +245,146 @@ namespace MiCalc.Runtime
 
 		public static string GetAsDecimal(BigFloat n)
 		{
-			return n.ToString().ToLower();
+			try
+			{
+				var s = n.ToString().ToLower().Replace(",", string.Empty);
+				var posE = s.IndexOf('e');
+				if (posE != -1)
+				{
+					var posPoint = s.IndexOf('.');
+					if (posPoint != -1)
+					{
+						var digitsAfterPoint = posE - posPoint - 1;
+						var sAfterE = s.Substring(posE + 1);
+						long exp;
+						if (long.TryParse(sAfterE, out exp))
+						{
+							if (exp > 0)
+							{
+								if (exp > digitsAfterPoint)
+								{
+									s = s.Substring(0, posPoint) + s.Substring(posPoint + 1, digitsAfterPoint) + "e" + (exp - digitsAfterPoint).ToString();
+								}
+								else if (exp == digitsAfterPoint)
+								{
+									s = s.Substring(0, posPoint) + s.Substring(posPoint + 1, digitsAfterPoint);
+								}
+								else
+								{
+									s = (s.Substring(0, posPoint) + s.Substring(posPoint + 1, digitsAfterPoint)).Insert(posPoint + (int)exp, ".");
+								}
+							}
+							else
+							{
+								// may be will implement later
+								s = s;
+							}
+						}
+					}
+				}
+				return s;
+			}
+			catch
+			{
+				return "Unexpected error";
+			}
 		}
 
 		public static string GetAsScience(BigFloat n)
 		{
-			var n1 = new BigFloat(n, _precisionSpecDec);
-			var isNegative = n1.Sign;
-			n1.Sign = false;
-
-			var log10 = BigFloat.Log10(n1);
-			if (log10.IsSpecialValue && log10.SpecialValue == BigFloat.SpecialValueType.INF_MINUS)
+			try
 			{
-				return "0e0";
+				var n1 = new BigFloat(n, _precisionSpec);
+				var isNegative = n1.Sign;
+				n1.Sign = false;
+
+				var log10 = BigFloat.Log10(n1);
+				if (log10.IsSpecialValue && log10.SpecialValue == BigFloat.SpecialValueType.INF_MINUS)
+				{
+					return "0e0";
+				}
+
+				log10 = Floor(log10);
+				var @base = n1/BigFloat.Pow(_ten, log10);
+
+				return (isNegative ? "-" : string.Empty) + @base.ToString().Replace(",", string.Empty) + "e" + log10.ToString().Replace(",", string.Empty);
 			}
-
-			log10 = Floor(log10);
-			var @base = n1/BigFloat.Pow(_ten, log10);
-
-			return (isNegative ? "-" : string.Empty) + @base.ToString() + "e" + log10.ToString();
+			catch
+			{
+				return "Unexpected error";
+			}
 		}
 
 		public static string GetAsHex(BigFloat n)
 		{
-//			new BigInt(n).ToString()
-//			BigNum.PrecisionSpec.BaseType.
-			return n.ToString().ToLower();
+			try
+			{
+				string result;
+
+				if (n.GreaterThan(_nLongUnsignedMax))
+				{
+					result = "Number > Unsigned QWORD";
+				}
+				else if (n.LessThan(_nLongSignedMin))
+				{
+					result = "Number < Signed QWORD";
+				}
+				else if (n.Sign == false)
+				{
+					// >= 0
+					var floored = BigFloat.ConvertToInt(Round(n), _precisionSpec, false);
+					result = floored.ToString(16);
+				}
+				else
+				{
+					// < 0
+					var floored = BigFloat.ConvertToInt(n, _precisionSpec, false);
+					floored.Sign = false;
+					result = (_nLongUnsignedMaxPlusOne - floored).ToString(16);
+				}
+
+				return result;
+			}
+			catch
+			{
+				return "Unexpected error";
+			}
 		}
 
 		public static string GetAsBin(BigFloat n)
 		{
-			return n.ToString().ToLower();
+			try
+			{
+				string result;
+
+				if (n.GreaterThan(_nLongUnsignedMax))
+				{
+					result = "Number > Unsigned QWORD";
+				}
+				else if (n.LessThan(_nLongSignedMin))
+				{
+					result = "Number < Signed QWORD";
+				}
+				else if (n.Sign == false)
+				{
+					// >= 0
+					var floored = BigFloat.ConvertToInt(Round(n), _precisionSpec, false);
+					result = floored.ToString(2);
+				}
+				else
+				{
+					// < 0
+					var floored = BigFloat.ConvertToInt(n, _precisionSpec, false);
+					floored.Sign = false;
+					result = (_nLongUnsignedMaxPlusOne - floored).ToString(2);
+				}
+
+				return result;
+			}
+			catch
+			{
+				return "Unexpected error";
+			}
 		}
 	}
 }

@@ -589,6 +589,24 @@ namespace MiCalc.Tests
 		}
 
 		[TestMethod]
+		public void GetAsDecimal7()
+		{
+			var input = "2^64";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsDecimal(result);
+			Assert.AreEqual("18446744073709551616", s);
+		}
+
+		[TestMethod]
+		public void GetAsDecimal8()
+		{
+			var input = "2^64-1";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsDecimal(result);
+			Assert.AreEqual("18446744073709551615", s);
+		}
+
+		[TestMethod]
 		public void GetAsScience1()
 		{
 			var input = "123";
@@ -645,10 +663,55 @@ namespace MiCalc.Tests
 		[TestMethod]
 		public void GetAsHex1()
 		{
-			var input = "-0.123";
+			var input = "2^64-1";
 			var result = GetResultAsBigFloat(input);
 			var s = Runtime.CalcHelper.GetAsHex(result);
-			Assert.AreEqual("-1.23e-1", s);
+			Assert.AreEqual("FFFFFFFF FFFFFFFF", s);
+		}
+
+		[TestMethod]
+		public void GetAsHex2()
+		{
+			var input = "2^64-2";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsHex(result);
+			Assert.AreEqual("FFFFFFFF FFFFFFFE", s);
+		}
+
+		[TestMethod]
+		public void GetAsHex3()
+		{
+			var input = "-1";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsHex(result);
+			Assert.AreEqual("FFFFFFFF FFFFFFFF", s);
+		}
+
+		[TestMethod]
+		public void GetAsBin1()
+		{
+			var input = "2^64-1";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsBin(result);
+			Assert.AreEqual("11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111", s);
+		}
+
+		[TestMethod]
+		public void GetAsBin2()
+		{
+			var input = "2^64-2";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsBin(result);
+			Assert.AreEqual("11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111110", s);
+		}
+
+		[TestMethod]
+		public void GetAsBin3()
+		{
+			var input = "-1";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsBin(result);
+			Assert.AreEqual("11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111", s);
 		}
 	}
 }
