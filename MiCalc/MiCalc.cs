@@ -45,10 +45,8 @@ namespace MiCalc
 			Size = new Size(Settings.Settings.GetWindowSize().Width, Size.Height);
 
 			// set form size limits
-			//var defSize = new Size(_defWidth, Size.Height);
 			var minSize = new Size(_minWidth, Size.Height);
 			var maxSize = new Size(int.MaxValue, Size.Height);
-			//Size = defSize;
 			MinimumSize = minSize;
 			MaximumSize = maxSize;
 
@@ -220,12 +218,33 @@ namespace MiCalc
 
 		private void ubCopy_Click(object sender, EventArgs e)
 		{
-			//tbDecimal.Text
+			try
+			{
+				Clipboard.SetText(tbDecimal.Text);
+			}
+			catch (System.Runtime.InteropServices.ExternalException)
+			{
+				MessageBox.Show(
+					"Error copying text to the clipboard. Try to close all programs that can block clipboard (like PuntoSwitcher).",
+					"Error",
+					MessageBoxButtons.OK,
+					MessageBoxIcon.Error
+					);
+			}
 		}
 
 		private void ubPaste_Click(object sender, EventArgs e)
 		{
-			//rtbExpression.Text
+			var cbText = Clipboard.GetText();
+			var s = rtbExpression.Text;
+			if (rtbExpression.SelectionLength > 0)
+			{
+				s = s.Remove(rtbExpression.SelectionStart, rtbExpression.SelectionLength);
+			}
+			s = s.Insert(rtbExpression.SelectionStart, cbText);
+			rtbExpression.Text = s;
+			rtbExpression.SelectionStart = rtbExpression.SelectionStart + cbText.Length;
+			rtbExpression.SelectionLength = 0;
 		}
 
 		private void ubDegrees_Click(object sender, EventArgs e)

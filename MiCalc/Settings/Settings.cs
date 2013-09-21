@@ -1,21 +1,15 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace MiCalc.Settings
 {
 	public static class Settings
 	{
-		private static string _configFilename = Path.Combine(Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath), "micalc.cfg");
+		private static string _configFilename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "micalc.cfg");
 		private static InternalSettings _settingInstance = new InternalSettings();
 
 
