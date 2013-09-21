@@ -25,6 +25,10 @@ OpDiv		"/"
 OpMod		"%"
 OpPow		"^"
 OpFac		"!"
+OpAnd		"&"
+OpOr		"|"
+OpNot		"~"
+OpXor		":"
 LeftPar		"("
 RigthPar	")"
 // constants
@@ -75,6 +79,10 @@ FuncSqrt	"sqrt"
 {OpMod}		{ return (int) Tokens.OP_MOD; }
 {OpPow}		{ return (int) Tokens.OP_POW; }
 {OpFac}		{ return (int) Tokens.OP_FAC; }
+{OpAnd}		{ return (int) Tokens.OP_AND; }
+{OpOr}		{ return (int) Tokens.OP_OR; }
+{OpNot}		{ return (int) Tokens.OP_NOT; }
+{OpXor}		{ return (int) Tokens.OP_XOR; }
 {LeftPar}	{ return (int) Tokens.OP_LEFT_PAR; }
 {RigthPar}	{ return (int) Tokens.OP_RIGHT_PAR; }
 

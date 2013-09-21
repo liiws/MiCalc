@@ -16,8 +16,10 @@ namespace MiCalc.Runtime
 		private static BigFloat _ten = new BigFloat(10.0d, _precisionSpec);
 		private static BigFloat _n180 = new BigFloat(180.0d, _precisionSpec);
 		private static BigFloat _nLongUnsignedMax = new BigFloat("18446744073709551615", _precisionSpec);
+		private static BigInt _nLongUnsignedMaxInt = new BigInt("18446744073709551615", _precisionSpec);
 		private static BigFloat _nLongSignedMin = new BigFloat("-9223372036854775808", _precisionSpec);
 		private static BigInt _nLongUnsignedMaxPlusOne = new BigInt("18446744073709551616", _precisionSpec);
+		private static BigInt _nLongZero = new BigInt("0", _precisionSpec);
 
 
 		public static bool IsRadians = false;
@@ -87,6 +89,108 @@ namespace MiCalc.Runtime
 			var whole = Floor(n1/n2);
 			var mod = n1 - whole*n2;
 			return mod;
+		}
+
+		public static BigFloat And(BigFloat n1, BigFloat n2)
+		{
+			if (n1.GreaterThan(_nLongUnsignedMax) || n2.GreaterThan(_nLongUnsignedMax))
+			{
+				throw new Exception("Error: bitwise operator for Number > Unsigned QWORD");
+			}
+			else if (n1.LessThan(_nLongSignedMin) || n2.LessThan(_nLongSignedMin))
+			{
+				throw new Exception("Error: bitwise operator for Number < Signed QWORD");
+			}
+			var int1 = BigFloat.ConvertToInt(Round(n1), _precisionSpec, false);
+			var int2 = BigFloat.ConvertToInt(Round(n2), _precisionSpec, false);
+
+			if (int1.Sign)
+			{
+				int1.Sign = false;
+				int1 = _nLongUnsignedMaxPlusOne - int1;
+			}
+			if (int2.Sign)
+			{
+				int2.Sign = false;
+				int2 = _nLongUnsignedMaxPlusOne - int2;
+			}
+
+			return new BigFloat(BigInt.And(int1, int2).ToString(), _precisionSpec);
+		}
+
+		public static BigFloat Or(BigFloat n1, BigFloat n2)
+		{
+			if (n1.GreaterThan(_nLongUnsignedMax) || n2.GreaterThan(_nLongUnsignedMax))
+			{
+				throw new Exception("Error: bitwise operator for Number > Unsigned QWORD");
+			}
+			else if (n1.LessThan(_nLongSignedMin) || n2.LessThan(_nLongSignedMin))
+			{
+				throw new Exception("Error: bitwise operator for Number < Signed QWORD");
+			}
+			var int1 = BigFloat.ConvertToInt(Round(n1), _precisionSpec, false);
+			var int2 = BigFloat.ConvertToInt(Round(n2), _precisionSpec, false);
+
+			if (int1.Sign)
+			{
+				int1.Sign = false;
+				int1 = _nLongUnsignedMaxPlusOne - int1;
+			}
+			if (int2.Sign)
+			{
+				int2.Sign = false;
+				int2 = _nLongUnsignedMaxPlusOne - int2;
+			}
+
+			return new BigFloat(BigInt.Or(int1, int2).ToString(), _precisionSpec);
+		}
+
+		public static BigFloat Not(BigFloat n)
+		{
+			if (n.GreaterThan(_nLongUnsignedMax))
+			{
+				throw new Exception("Error: bitwise operator for Number > Unsigned QWORD");
+			}
+			else if (n.LessThan(_nLongSignedMin))
+			{
+				throw new Exception("Error: bitwise operator for Number < Signed QWORD");
+			}
+			var int1 = BigFloat.ConvertToInt(Round(n), _precisionSpec, false);
+
+			if (int1.Sign)
+			{
+				int1.Sign = false;
+				int1 = _nLongUnsignedMaxPlusOne - int1;
+			}
+
+			return new BigFloat(BigInt.Xor(int1, _nLongUnsignedMaxInt).ToString(), _precisionSpec);
+		}
+
+		public static BigFloat Xor(BigFloat n1, BigFloat n2)
+		{
+			if (n1.GreaterThan(_nLongUnsignedMax) || n2.GreaterThan(_nLongUnsignedMax))
+			{
+				throw new Exception("Error: bitwise operator for Number > Unsigned QWORD");
+			}
+			else if (n1.LessThan(_nLongSignedMin) || n2.LessThan(_nLongSignedMin))
+			{
+				throw new Exception("Error: bitwise operator for Number < Signed QWORD");
+			}
+			var int1 = BigFloat.ConvertToInt(Round(n1), _precisionSpec, false);
+			var int2 = BigFloat.ConvertToInt(Round(n2), _precisionSpec, false);
+
+			if (int1.Sign)
+			{
+				int1.Sign = false;
+				int1 = _nLongUnsignedMaxPlusOne - int1;
+			}
+			if (int2.Sign)
+			{
+				int2.Sign = false;
+				int2 = _nLongUnsignedMaxPlusOne - int2;
+			}
+
+			return new BigFloat(BigInt.Xor(int1, int2).ToString(), _precisionSpec);
 		}
 
 		public static BigFloat Pow(BigFloat n1, BigFloat n2)
@@ -338,7 +442,7 @@ namespace MiCalc.Runtime
 				else
 				{
 					// < 0
-					var floored = BigFloat.ConvertToInt(n, _precisionSpec, false);
+					var floored = BigFloat.ConvertToInt(Round(n), _precisionSpec, false);
 					floored.Sign = false;
 					result = (_nLongUnsignedMaxPlusOne - floored).ToString(16);
 				}
@@ -374,7 +478,7 @@ namespace MiCalc.Runtime
 				else
 				{
 					// < 0
-					var floored = BigFloat.ConvertToInt(n, _precisionSpec, false);
+					var floored = BigFloat.ConvertToInt(Round(n), _precisionSpec, false);
 					floored.Sign = false;
 					result = (_nLongUnsignedMaxPlusOne - floored).ToString(2);
 				}

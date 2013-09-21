@@ -43,6 +43,10 @@
 %left OP_ADD OP_SUB
 %left OP_MUL OP_DIV
 %left OP_MOD
+%left OP_OR
+%left OP_XOR
+%left OP_AND
+%left OP_NOT
 %left OP_POW
 %left OP_FAC
 %left UMINUS UPLUS
@@ -62,6 +66,10 @@ expr		: OP_LEFT_PAR expr OP_RIGHT_PAR { $$ = $2; }
 			| expr OP_DIV expr { $$.expr = new Expression(Operation.Div, $1.expr, $3.expr); }
 			| expr OP_MOD expr { $$.expr = new Expression(Operation.Mod, $1.expr, $3.expr); }
 			| expr OP_POW expr { $$.expr = new Expression(Operation.Pow, $1.expr, $3.expr); }
+			| expr OP_AND expr { $$.expr = new Expression(Operation.And, $1.expr, $3.expr); }
+			| expr OP_OR expr { $$.expr = new Expression(Operation.Or, $1.expr, $3.expr); }
+			| OP_NOT expr { $$.expr = new Expression(Operation.Not, $2.expr, null); }
+			| expr OP_XOR expr { $$.expr = new Expression(Operation.Xor, $1.expr, $3.expr); }
 			| expr OP_FAC { $$.expr = new Expression(Operation.Fac, $1.expr, null); }
 			| OP_SUB expr %prec UMINUS { $$.expr.IsNegative = !$$.expr.IsNegative; }
 			| OP_ADD expr %prec UPLUS { ; }

@@ -1,10 +1,10 @@
 
 // ==========================================================================
-//  GPPG error listing for yacc source file <MiCalcParser.y - 21.09.2013 15:00:18>
+//  GPPG error listing for yacc source file <MiCalcParser.y - 22.09.2013 0:55:49>
 // ==========================================================================
 //  Version:  1.5.0
 //  Machine:  LGT-PC
-//  DateTime: 21.09.2013 15:00:36
+//  DateTime: 22.09.2013 0:55:54
 //  UserName: lgt
 // ==========================================================================
 
@@ -32,6 +32,22 @@
 %token FUNC_FLOOR
 %token FUNC_CEIL
 %token FUNC_ROUND
+%token FUNC_SIN
+%token FUNC_COS
+%token FUNC_TAN
+%token FUNC_ASIN
+%token FUNC_ACOS
+%token FUNC_ATAN
+%token FUNC_SINH
+%token FUNC_COSH
+%token FUNC_TANG
+%token FUNC_ASINH
+%token FUNC_ACOSH
+%token FUNC_ATANH
+%token FUNC_LN
+%token FUNC_LG
+%token FUNC_EXP
+%token FUNC_SQRT
 
 %token OP_RIGHT_PAR
 %token OP_LEFT_PAR
@@ -45,59 +61,21 @@
 
 // YACC Rules
 %%
-// Error: NonTerminal symbol "FUNC_ATAN" has no productions
-// Error: NonTerminal symbol "FUNC_ACOS" has no productions
-// Error: NonTerminal symbol "FUNC_COSH" has no productions
-// Error: NonTerminal symbol "FUNC_SINH" has no productions
-// Error: NonTerminal symbol "FUNC_COS" has no productions
-// Error: NonTerminal symbol "FUNC_SIN" has no productions
-// Error: NonTerminal symbol "FUNC_ASIN" has no productions
-// Error: NonTerminal symbol "FUNC_TAN" has no productions
-// Error: NonTerminal symbol "FUNC_LG" has no productions
-// Error: NonTerminal symbol "FUNC_LN" has no productions
-// Error: NonTerminal symbol "FUNC_SQRT" has no productions
-// Error: NonTerminal symbol "FUNC_EXP" has no productions
-// Error: NonTerminal symbol "FUNC_ASINH" has no productions
-// Error: NonTerminal symbol "FUNC_TANG" has no productions
-// Error: NonTerminal symbol "FUNC_ATANH" has no productions
-// Error: NonTerminal symbol "FUNC_ACOSH" has no productions
-// Warning: Terminating FUNC_SQRT fixes the following size-1 NonTerminal set
-   // {FUNC_SQRT}
-// Warning: Terminating FUNC_ACOS fixes the following size-1 NonTerminal set
-   // {FUNC_ACOS}
-// Warning: Terminating FUNC_ASIN fixes the following size-1 NonTerminal set
-   // {FUNC_ASIN}
-// Warning: Terminating FUNC_SINH fixes the following size-1 NonTerminal set
-   // {FUNC_SINH}
-// Warning: Terminating FUNC_ATAN fixes the following size-1 NonTerminal set
-   // {FUNC_ATAN}
-// Warning: Terminating FUNC_SIN fixes the following size-1 NonTerminal set
-   // {FUNC_SIN}
-// Error: There are 16 non-terminating NonTerminal Symbols
-   //  {FUNC_SIN, FUNC_COS, FUNC_TAN, FUNC_ASIN, FUNC_ACOS, FUNC_ATAN, FUNC_SINH, 
-   //     FUNC_COSH, FUNC_TANG, FUNC_ASINH, FUNC_ACOSH, FUNC_ATANH, FUNC_LN, 
-   //     FUNC_LG, FUNC_EXP, FUNC_SQRT}
-// Warning: Terminating FUNC_TAN fixes the following size-1 NonTerminal set
-   // {FUNC_TAN}
-// Warning: Terminating FUNC_COS fixes the following size-1 NonTerminal set
-   // {FUNC_COS}
-// Warning: Terminating FUNC_LN fixes the following size-1 NonTerminal set
-   // {FUNC_LN}
-// Warning: Terminating FUNC_ATANH fixes the following size-1 NonTerminal set
-   // {FUNC_ATANH}
-// Warning: Terminating FUNC_EXP fixes the following size-1 NonTerminal set
-   // {FUNC_EXP}
-// Warning: Terminating FUNC_LG fixes the following size-1 NonTerminal set
-   // {FUNC_LG}
-// Warning: Terminating FUNC_TANG fixes the following size-1 NonTerminal set
-   // {FUNC_TANG}
-// Warning: Terminating FUNC_COSH fixes the following size-1 NonTerminal set
-   // {FUNC_COSH}
-// Warning: Terminating FUNC_ACOSH fixes the following size-1 NonTerminal set
-   // {FUNC_ACOSH}
-// Warning: Terminating FUNC_ASINH fixes the following size-1 NonTerminal set
-   // {FUNC_ASINH}
-// -------------------------------------------------------------------------------
+// Error: NonTerminal symbol "OP_OR" has no productions
+// Error: NonTerminal symbol "OP_AND" has no productions
+// Error: NonTerminal symbol "OP_XOR" has no productions
+// Error: NonTerminal symbol "OP_NOT" has no productions
+// Warning: Terminating OP_XOR fixes the following size-1 NonTerminal set
+   // {OP_XOR}
+// Warning: Terminating OP_AND fixes the following size-1 NonTerminal set
+   // {OP_AND}
+// Error: There are 4 non-terminating NonTerminal Symbols
+   //  {OP_AND, OP_OR, OP_NOT, OP_XOR}
+// Warning: Terminating OP_NOT fixes the following size-1 NonTerminal set
+   // {OP_NOT}
+// Warning: Terminating OP_OR fixes the following size-1 NonTerminal set
+   // {OP_OR}
+// ----------------------------------------------------------------------
 expression	: expr { expression = $1.expr; }
 			;
 
@@ -110,6 +88,10 @@ expr		: OP_LEFT_PAR expr OP_RIGHT_PAR { $$ = $2; }
 			| expr OP_DIV expr { $$.expr = new Expression(Operation.Div, $1.expr, $3.expr); }
 			| expr OP_MOD expr { $$.expr = new Expression(Operation.Mod, $1.expr, $3.expr); }
 			| expr OP_POW expr { $$.expr = new Expression(Operation.Pow, $1.expr, $3.expr); }
+			| expr OP_AND expr { $$.expr = new Expression(Operation.And, $1.expr, $3.expr); }
+			| expr OP_OR expr { $$.expr = new Expression(Operation.Or, $1.expr, $3.expr); }
+			| expr OP_NOT expr { $$.expr = new Expression(Operation.Not, $1.expr, $3.expr); }
+			| expr OP_XOR expr { $$.expr = new Expression(Operation.Xor, $1.expr, $3.expr); }
 			| expr OP_FAC { $$.expr = new Expression(Operation.Fac, $1.expr, null); }
 			| OP_SUB expr %prec UMINUS { $$.expr.IsNegative = !$$.expr.IsNegative; }
 			| OP_ADD expr %prec UPLUS { ; }

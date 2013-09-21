@@ -163,6 +163,38 @@ namespace MiCalc.Tests
 		}
 
 		[TestMethod]
+		public void And()
+		{
+			var input = "5&3";
+			var result = GetResult(input);
+			Assert.AreEqual(1, result);
+		}
+
+		[TestMethod]
+		public void Or()
+		{
+			var input = "5|3";
+			var result = GetResult(input);
+			Assert.AreEqual(7, result);
+		}
+
+		[TestMethod]
+		public void Not()
+		{
+			var input = "~-2";
+			var result = GetResult(input);
+			Assert.AreEqual(1, result);
+		}
+
+		[TestMethod]
+		public void Xor()
+		{
+			var input = "5:3";
+			var result = GetResult(input);
+			Assert.AreEqual(6, result);
+		}
+
+		[TestMethod]
 		public void Brackets()
 		{
 			var input = "(2+3)*4";

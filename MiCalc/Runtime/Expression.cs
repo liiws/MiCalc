@@ -90,6 +90,22 @@ namespace MiCalc.Runtime
 			{
 				result = CalcHelper.Mod(Left.Calc(), Right.Calc());
 			}
+			else if (Operation == Operation.And)
+			{
+				result = CalcHelper.And(Left.Calc(), Right.Calc());
+			}
+			else if (Operation == Operation.Or)
+			{
+				result = CalcHelper.Or(Left.Calc(), Right.Calc());
+			}
+			else if (Operation == Operation.Not)
+			{
+				result = CalcHelper.Not(Left.Calc());
+			}
+			else if (Operation == Operation.Xor)
+			{
+				result = CalcHelper.Xor(Left.Calc(), Right.Calc());
+			}
 			else if (Operation == Operation.Pow)
 			{
 				result = CalcHelper.Pow(Left.Calc(), Right.Calc());

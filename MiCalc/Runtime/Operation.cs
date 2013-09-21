@@ -16,5 +16,9 @@ namespace MiCalc.Runtime
 		Mod,
 		Pow,
 		Fac,
+		And,
+		Or,
+		Not,
+		Xor,
 	}
 }
