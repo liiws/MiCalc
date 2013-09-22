@@ -61,6 +61,16 @@ namespace MiCalc.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BigNum {
+            get {
+                object obj = ResourceManager.GetObject("BigNum", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon {
@@ -167,6 +177,16 @@ namespace MiCalc.Properties {
             get {
                 object obj = ResourceManager.GetObject("icon_wnd_ontop", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] QUT_ShiftReduceParser {
+            get {
+                object obj = ResourceManager.GetObject("QUT_ShiftReduceParser", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }
