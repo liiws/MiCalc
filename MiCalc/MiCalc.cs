@@ -73,6 +73,8 @@ namespace MiCalc
 			new ToolTip().SetToolTip(lHex, "64-bit signed hexadecimal value");
 			new ToolTip().SetToolTip(lBin, "64-bit signed binary value");
 
+			rtbExpression.AutoWordSelection = false;
+
 			// restore calculation expression
 			rtbExpression.Text = Settings.Settings.GetCalculationExpression();
 		}

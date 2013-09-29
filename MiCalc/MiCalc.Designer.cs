@@ -143,7 +143,6 @@
 			this.rtbExpression.Multiline = false;
 			this.rtbExpression.Name = "rtbExpression";
 			this.rtbExpression.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-			this.rtbExpression.ShortcutsEnabled = false;
 			this.rtbExpression.Size = new System.Drawing.Size(382, 23);
 			this.rtbExpression.TabIndex = 0;
 			this.rtbExpression.Text = "";
