@@ -18,6 +18,7 @@ namespace MiCalc.Settings
 		{
 			public Point WndLocation { get; set; }
 			public Size WndSize { get; set; }
+			public bool AlwaysOnTop { get; set; }
 			public string Expression { get; set; }
 		}
 
@@ -35,6 +36,7 @@ namespace MiCalc.Settings
 				// default settings
 				_settingInstance.WndLocation = new Point(400, 400);
 				_settingInstance.WndSize = new Size(710, 0);
+				_settingInstance.AlwaysOnTop = false;
 				_settingInstance.Expression = string.Empty;
 
 				SaveSettings();
@@ -78,6 +80,16 @@ namespace MiCalc.Settings
 		public static void SetWindowSize(Size size)
 		{
 			_settingInstance.WndSize = size;
+		}
+
+		public static bool GetAlwaysOnTop()
+		{
+			return _settingInstance.AlwaysOnTop;
+		}
+
+		public static void SetAlwaysOnTop(bool alwaysOnTop)
+		{
+			_settingInstance.AlwaysOnTop = alwaysOnTop;
 		}
 
 		public static string GetCalculationExpression()

@@ -51,6 +51,8 @@ namespace MiCalc
 			MinimumSize = minSize;
 			MaximumSize = maxSize;
 
+			SetOnTop(Settings.Settings.GetAlwaysOnTop());
+
 			// set button images
 			ubClose.Image = Resources.icon_wnd_close.ToBitmap();
 			ubCopy.Image = Resources.icon_copy.ToBitmap();
@@ -228,8 +230,13 @@ namespace MiCalc
 
 		private void ubOnTop_Click(object sender, EventArgs e)
 		{
-			TopMost = !TopMost;
-			ubOnTop.Image = TopMost ? Resources.icon_wnd_ontop.ToBitmap() : Resources.icon_wnd_normal.ToBitmap();
+			SetOnTop(!TopMost);
+		}
+
+		private void SetOnTop(bool onTop)
+		{
+			TopMost = onTop;
+			ubOnTop.Image = onTop ? Resources.icon_wnd_ontop.ToBitmap() : Resources.icon_wnd_normal.ToBitmap();
 		}
 
 		private void ubCopy_Click(object sender, EventArgs e)
@@ -289,6 +296,7 @@ namespace MiCalc
 		{
 			Settings.Settings.SetWindowLocation(Location);
 			Settings.Settings.SetWindowSize(Size);
+			Settings.Settings.SetAlwaysOnTop(TopMost);
 			Settings.Settings.SetCalculationExpression(rtbExpression.Text);
 
 			Settings.Settings.SaveSettings();
