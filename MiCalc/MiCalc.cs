@@ -35,6 +35,16 @@ namespace MiCalc
 
 		private void fMain_Load(object sender, EventArgs e)
 		{
+			// set default button images
+			ubClose.Image = Resources.icon_wnd_close.ToBitmap();
+			ubCopy.Image = Resources.icon_copy.ToBitmap();
+			ubDegrees.Image = Resources.icon_degrees.ToBitmap();
+			ubFunctions.Image = Resources.icon_functions.ToBitmap();
+			ubMinimize.Image = Resources.icon_wnd_min.ToBitmap();
+			ubOnTop.Image = Resources.icon_wnd_normal.ToBitmap();
+			ubPaste.Image = Resources.icon_paste.ToBitmap();
+			ubQuestion.Image = Resources.icon_question.ToBitmap();
+
 			// hide caption
 			ControlBox = false;
 			Text = string.Empty;
@@ -52,16 +62,6 @@ namespace MiCalc
 			MaximumSize = maxSize;
 
 			SetOnTop(Settings.Settings.GetAlwaysOnTop());
-
-			// set button images
-			ubClose.Image = Resources.icon_wnd_close.ToBitmap();
-			ubCopy.Image = Resources.icon_copy.ToBitmap();
-			ubDegrees.Image = Resources.icon_degrees.ToBitmap();
-			ubFunctions.Image = Resources.icon_functions.ToBitmap();
-			ubMinimize.Image = Resources.icon_wnd_min.ToBitmap();
-			ubOnTop.Image = Resources.icon_wnd_normal.ToBitmap();
-			ubPaste.Image = Resources.icon_paste.ToBitmap();
-			ubQuestion.Image = Resources.icon_question.ToBitmap();
 
 			// tooltips
 			new ToolTip().SetToolTip(ubClose, "Close the program");
