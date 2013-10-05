@@ -56,6 +56,12 @@
   <ItemGroup>
     <Compile Include="Analyzing\MiCalcParser.cs" />
     <Compile Include="Analyzing\MiCalcScanner.cs" />
+    <Compile Include="Controls\RichTextBoxWithUndo.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\RichTextBoxWithUndo.Designer.cs">
+      <DependentUpon>RichTextBoxWithUndo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UnfocusedButton.cs">
       <SubType>Component</SubType>
     </Compile>

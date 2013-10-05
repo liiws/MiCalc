@@ -36,7 +36,7 @@
 			this.tbScience = new System.Windows.Forms.TextBox();
 			this.tbHex = new System.Windows.Forms.TextBox();
 			this.tbBin = new System.Windows.Forms.TextBox();
-			this.rtbExpression = new System.Windows.Forms.RichTextBox();
+			this.rtbExpression = new MiCalc.Controls.RichTextBoxWithUndo();
 			this.ubClose = new MiCalc.Controls.UnfocusedButton();
 			this.ubCopy = new MiCalc.Controls.UnfocusedButton();
 			this.ubFunctions = new MiCalc.Controls.UnfocusedButton();
