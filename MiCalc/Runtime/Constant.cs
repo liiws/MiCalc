@@ -8,7 +8,7 @@ namespace MiCalc.Runtime
 {
 	public enum Constant
 	{
-		None = 0,
+		None,
 		Pi,
 		E,
 	}

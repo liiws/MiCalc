@@ -4,9 +4,9 @@
 
 // GPPG version 1.5.0
 // Machine:  LGT-PC
-// DateTime: 22.09.2013 2:32:12
+// DateTime: 13.10.2013 13:38:55
 // UserName: lgt
-// Input file <MiCalcParser.y - 22.09.2013 2:32:07>
+// Input file <MiCalcParser.y - 13.10.2013 13:38:04>
 
 // options: no-lines gplex
 
@@ -52,9 +52,9 @@ public class ScanObj {
 
 public class Parser: ShiftReduceParser<ValueType, LexLocation>
 {
-  // Verbatim content from MiCalcParser.y - 22.09.2013 2:32:07
+  // Verbatim content from MiCalcParser.y - 13.10.2013 13:38:04
 	public Expression expression = new Expression();
-  // End verbatim content from MiCalcParser.y - 22.09.2013 2:32:07
+  // End verbatim content from MiCalcParser.y - 13.10.2013 13:38:04
 
 #pragma warning disable 649
   private static Dictionary<int, string> aliasses;

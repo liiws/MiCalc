@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using BigNum;
 
 namespace MiCalc.Runtime
@@ -66,6 +67,11 @@ namespace MiCalc.Runtime
 			// number
 			if (Number != null)
 			{
+				var re = new Regex(@"^([0-9]+\.?[0-9]*|\.[0-9]+)([e][0-9]+)?$", RegexOptions.IgnoreCase);
+				if (!re.IsMatch(Number))
+				{
+					throw new Exception("Wrong number: " +  Number);
+				}
 				result = CalcHelper.ParseNumber(Number);
 			}
 

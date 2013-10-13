@@ -4,17 +4,9 @@
 
 %option stack, minimize, parser, verbose, persistbuffer, unicode, compressNext, embedbuffers, caseInsensitive
 
-%{
-public void yyerror(string format, params object[] args) // remember to add override back
-{
-	System.Console.Error.WriteLine("Error: line {0} - " + format, yyline);
-}
-%}
 //base
 D		[0-9]
-AZ		[a-zA-Z]
-//Name	{AZ}+{D}*
-Number	({D}+\.?{D}*|\.{D}+)([eE]{D}+)?
+Number	({D}+\.?{D}*|\.{D}+)([e]{D}+)?[a-z]*
 //whitespace
 Space		[\t\s]
 //operators
