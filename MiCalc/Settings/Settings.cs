@@ -20,6 +20,8 @@ namespace MiCalc.Settings
 			public Size WndSize { get; set; }
 			public bool AlwaysOnTop { get; set; }
 			public string Expression { get; set; }
+			public bool IsRadians { get; set; }
+			public bool IsHideDigits { get; set; }
 		}
 
 		public static void LoadSettings()
@@ -33,11 +35,13 @@ namespace MiCalc.Settings
 			}
 			catch
 			{
-				// default settings
+                // default settings
 				_settingInstance.WndLocation = new Point(400, 400);
 				_settingInstance.WndSize = new Size(710, 0);
 				_settingInstance.AlwaysOnTop = false;
 				_settingInstance.Expression = string.Empty;
+				_settingInstance.IsRadians = false;
+				_settingInstance.IsHideDigits = false;
 
 				SaveSettings();
 			}
@@ -100,6 +104,26 @@ namespace MiCalc.Settings
 		public static void SetCalculationExpression(string expression)
 		{
 			_settingInstance.Expression = expression.Trim();
+		}
+
+		public static bool GetCalculationIsRadians()
+		{
+			return _settingInstance.IsRadians;
+		}
+
+		public static void SetCalculationIsRadians(bool isRadians)
+		{
+			_settingInstance.IsRadians = isRadians;
+		}
+
+		public static bool GetCalculationIsHideDigits()
+		{
+			return _settingInstance.IsHideDigits;
+		}
+
+		public static void SetCalculationIsHideDigits(bool isHideDigits)
+		{
+			_settingInstance.IsHideDigits = isHideDigits;
 		}
 	}
 }

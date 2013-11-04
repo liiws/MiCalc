@@ -39,11 +39,24 @@ namespace MiCalc
 			ubClose.Image = Resources.icon_wnd_close.ToBitmap();
 			ubCopy.Image = Resources.icon_copy.ToBitmap();
 			ubDegrees.Image = Resources.icon_degrees.ToBitmap();
+			ubHideDigits.Image = Resources.icon_hide_digits_disabled.ToBitmap();
 			ubFunctions.Image = Resources.icon_functions.ToBitmap();
 			ubMinimize.Image = Resources.icon_wnd_min.ToBitmap();
 			ubOnTop.Image = Resources.icon_wnd_normal.ToBitmap();
 			ubPaste.Image = Resources.icon_paste.ToBitmap();
 			ubQuestion.Image = Resources.icon_question.ToBitmap();
+
+			CalcHelper.IsRadians = Settings.Settings.GetCalculationIsRadians();
+			if (CalcHelper.IsRadians)
+			{
+				ubDegrees.Image = Resources.icon_radians.ToBitmap();
+			}
+
+			CalcHelper.IsHideDigits = Settings.Settings.GetCalculationIsHideDigits();
+			if (CalcHelper.IsHideDigits)
+			{
+				ubHideDigits.Image = Resources.icon_hide_digits.ToBitmap();
+			}
 
 			// hide caption
 			ControlBox = false;
@@ -67,6 +80,7 @@ namespace MiCalc
 			new ToolTip().SetToolTip(ubClose, "Close the program");
 			new ToolTip().SetToolTip(ubCopy, "Copy decimal result to clipboard");
 			new ToolTip().SetToolTip(ubDegrees, "Set trigonometric functions unit");
+			new ToolTip().SetToolTip(ubHideDigits, "Do not show many digits after point");
 			new ToolTip().SetToolTip(ubFunctions, "List of available functions and operators");
 			new ToolTip().SetToolTip(ubMinimize, "Minimize window");
 			new ToolTip().SetToolTip(ubOnTop, "Set always on top");
@@ -292,12 +306,21 @@ namespace MiCalc
 			}
 		}
 
+		private void ubHideDigits_Click(object sender, EventArgs e)
+		{
+			CalcHelper.IsHideDigits = !CalcHelper.IsHideDigits;
+			ubHideDigits.Image = CalcHelper.IsHideDigits ? Resources.icon_hide_digits.ToBitmap() : Resources.icon_hide_digits_disabled.ToBitmap();
+			CalcResult();
+		}
+
 		private void fMain_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			Settings.Settings.SetWindowLocation(Location);
 			Settings.Settings.SetWindowSize(Size);
 			Settings.Settings.SetAlwaysOnTop(TopMost);
 			Settings.Settings.SetCalculationExpression(rtbExpression.Text);
+			Settings.Settings.SetCalculationIsRadians(CalcHelper.IsRadians);
+			Settings.Settings.SetCalculationIsHideDigits(CalcHelper.IsHideDigits);
 
 			Settings.Settings.SaveSettings();
 		}

@@ -130,6 +130,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\icon-hide-digits.ico" />
+    <None Include="Resources\icon-hide-digits-disabled.ico" />
     <None Include="Resources\BigNum.dll" />
     <None Include="Resources\QUT.ShiftReduceParser.dll" />
     <None Include="Resources\icon.ico" />

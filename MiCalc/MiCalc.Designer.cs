@@ -45,6 +45,7 @@
 			this.ubQuestion = new MiCalc.Controls.UnfocusedButton();
 			this.ubDegrees = new MiCalc.Controls.UnfocusedButton();
 			this.ubPaste = new MiCalc.Controls.UnfocusedButton();
+			this.ubHideDigits = new MiCalc.Controls.UnfocusedButton();
 			this.SuspendLayout();
 			// 
 			// lDecimal
@@ -241,11 +242,22 @@
 			this.ubPaste.UseVisualStyleBackColor = true;
 			this.ubPaste.Click += new System.EventHandler(this.ubPaste_Click);
 			// 
+			// ubHideDigits
+			// 
+			this.ubHideDigits.Location = new System.Drawing.Point(216, 5);
+			this.ubHideDigits.Name = "ubHideDigits";
+			this.ubHideDigits.Size = new System.Drawing.Size(32, 32);
+			this.ubHideDigits.TabIndex = 7;
+			this.ubHideDigits.TabStop = false;
+			this.ubHideDigits.UseVisualStyleBackColor = true;
+			this.ubHideDigits.Click += new System.EventHandler(this.ubHideDigits_Click);
+			// 
 			// fMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(392, 180);
+			this.Controls.Add(this.ubHideDigits);
 			this.Controls.Add(this.ubClose);
 			this.Controls.Add(this.ubCopy);
 			this.Controls.Add(this.ubFunctions);
@@ -287,7 +299,6 @@
 		private System.Windows.Forms.TextBox tbScience;
 		private System.Windows.Forms.TextBox tbHex;
 		private System.Windows.Forms.TextBox tbBin;
-		private System.Windows.Forms.RichTextBox rtbExpression;
 		private Controls.UnfocusedButton ubPaste;
 		private Controls.UnfocusedButton ubClose;
 		private Controls.UnfocusedButton ubCopy;
@@ -296,6 +307,8 @@
 		private Controls.UnfocusedButton ubMinimize;
 		private Controls.UnfocusedButton ubOnTop;
 		private Controls.UnfocusedButton ubFunctions;
+		private Controls.UnfocusedButton ubHideDigits;
+		private Controls.RichTextBoxWithUndo rtbExpression;
 
 	}
 }

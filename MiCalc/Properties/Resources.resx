@@ -157,4 +157,10 @@
   <data name="QUT_ShiftReduceParser" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\QUT.ShiftReduceParser.dll;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="icon_hide_digits_disabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-hide-digits-disabled.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_hide_digits" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon-hide-digits.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -11,13 +11,16 @@ namespace MiCalc.Tests
 		private double _maxError = 1.0e-10;
 
 
-		private double GetResult(string expression)
+		private double GetResult(string expression, bool isRadians = false, bool isHideDigits = false)
 		{
-			return double.Parse(GetResultAsBigFloat(expression).ToString());
+			return double.Parse(GetResultAsBigFloat(expression, isRadians, isHideDigits).ToString());
 		}
 
-		private BigFloat GetResultAsBigFloat(string expression)
+		private BigFloat GetResultAsBigFloat(string expression, bool isRadians = false, bool isHideDigits = false)
 		{
+			MiCalc.Runtime.CalcHelper.IsRadians = isRadians;
+			MiCalc.Runtime.CalcHelper.IsHideDigits = isHideDigits;
+
 			using (var ms = new System.IO.MemoryStream())
 			{
 				var data = Encoding.ASCII.GetBytes(expression);

@@ -22,7 +22,13 @@ namespace MiCalc.Runtime
 		private static BigInt _nLongZero = new BigInt("0", _precisionSpec);
 
 
+
+
 		public static bool IsRadians = false;
+
+		public static bool IsHideDigits = false;
+
+		public static int HideDigitsWhenMoreThan = 10;
 
 
 
@@ -415,33 +421,47 @@ namespace MiCalc.Runtime
 					if (posPoint != -1)
 					{
 						var digitsAfterPoint = posE - posPoint - 1;
-						var sAfterE = s.Substring(posE + 1);
+						var stringAfterE = s.Substring(posE + 1);
 						long exp;
-						if (long.TryParse(sAfterE, out exp))
+						if (long.TryParse(stringAfterE, out exp))
 						{
 							if (exp > 0)
 							{
 								if (exp > digitsAfterPoint)
 								{
+									// ex. 1.23e4
 									s = s.Substring(0, posPoint) + s.Substring(posPoint + 1, digitsAfterPoint) + "e" + (exp - digitsAfterPoint).ToString();
+									// = 123e2
 								}
 								else if (exp == digitsAfterPoint)
 								{
+									// ex. 1.23e2
 									s = s.Substring(0, posPoint) + s.Substring(posPoint + 1, digitsAfterPoint);
+									// = 123
 								}
 								else
 								{
+									// ex. 1.23e1
 									s = (s.Substring(0, posPoint) + s.Substring(posPoint + 1, digitsAfterPoint)).Insert(posPoint + (int)exp, ".");
+									// = 12.3
 								}
 							}
 							else
 							{
+								// exp < 0
+
 								// may be will implement later
 								s = s;
 							}
 						}
 					}
 				}
+
+				if (IsHideDigits)
+				{
+					s = HideDigitsAfterPoint(s);
+				}
+
 				return s;
 			}
 			catch
@@ -467,7 +487,15 @@ namespace MiCalc.Runtime
 				log10 = Floor(log10);
 				var @base = n1/BigFloat.Pow(_ten, log10);
 
-				return (isNegative ? "-" : string.Empty) + @base.ToString().Replace(",", string.Empty) + "e" + log10.ToString().Replace(",", string.Empty);
+
+				string s = (isNegative ? "-" : string.Empty) + @base.ToString().Replace(",", string.Empty) + "e" + log10.ToString().Replace(",", string.Empty);
+
+				if (IsHideDigits)
+				{
+					s = HideDigitsAfterPoint(s);
+				}
+
+				return s;
 			}
 			catch
 			{
@@ -545,6 +573,40 @@ namespace MiCalc.Runtime
 			{
 				return "Unexpected error";
 			}
+		}
+
+		private static string HideDigitsAfterPoint(string s)
+		{
+			var posPoint = s.IndexOf('.');
+			if (posPoint != -1)
+			{
+				int digitsAfterPoint;
+
+				var posE = s.IndexOf('e');
+				if (posE != -1)
+				{
+					digitsAfterPoint = posE - posPoint - 1;
+				}
+				else
+				{
+					digitsAfterPoint = s.Length - posPoint - 1;
+				}
+
+				if (digitsAfterPoint > HideDigitsWhenMoreThan)
+				{
+					s =
+						// whole part
+						s.Substring(0, posPoint)
+						// point
+						+ "."
+						// floating part
+						+ s.Substring(posPoint + 1, HideDigitsWhenMoreThan)
+						// after floating part
+						+ (s.Length > posPoint + 1 + digitsAfterPoint ? s.Substring(posPoint + 1 + digitsAfterPoint) : string.Empty);
+				}
+			}
+
+			return s;
 		}
 	}
 }
