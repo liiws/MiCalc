@@ -44,6 +44,18 @@ namespace MiCalc.Runtime
 			return new BigFloat(s, _precisionSpec);
 		}
 
+		public static BigFloat ParseNumberBin(string s)
+		{
+			var value = Convert.ToUInt64(s, 2);
+			return new BigFloat(value, _precisionSpec);
+		}
+
+		public static BigFloat ParseNumberHex(string s)
+		{
+			var value = Convert.ToUInt64(s, 16);
+			return new BigFloat(value, _precisionSpec);
+		}
+
 		public static BigFloat ChangeSign(BigFloat n)
 		{
 			var n1 = new BigFloat(n);

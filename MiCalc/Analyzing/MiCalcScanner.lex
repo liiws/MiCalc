@@ -7,6 +7,8 @@
 //base
 D		[0-9]
 Number	({D}+\.?{D}*|\.{D}+)([e]{D}+)?[a-z]*
+NumberBin	[01]+b
+NumberHex	[0-9a-f]+h
 //whitespace
 Space		[\t\s]
 //operators
@@ -61,6 +63,8 @@ FuncSqrt	"sqrt"
 //
 
 //{Name}		{ yylval.String = yytext; return (int) Tokens.NAME; }
+{NumberBin}	{ yylval.String = yytext; return (int) Tokens.NUMBERBIN; }
+{NumberHex}	{ yylval.String = yytext; return (int) Tokens.NUMBERHEX; }
 {Number}	{ yylval.String = yytext; return (int) Tokens.NUMBER; }
 
 // Remove whitespaces.

@@ -14,6 +14,8 @@
 }
 // Defining Tokens
 %token <String>	NUMBER
+%token <String>	NUMBERBIN
+%token <String>	NUMBERHEX
 
 %token CONST_PI
 %token CONST_E
@@ -100,6 +102,8 @@ func		: FUNC_FLOOR OP_LEFT_PAR expr OP_RIGHT_PAR { $$.expr = new Expression(Func
 			;
 
 stat		: NUMBER { $$.expr = new Expression($1); }
+			| NUMBERBIN { $$.expr = new Expression($1); }
+			| NUMBERHEX { $$.expr = new Expression($1); }
 			| const { $$ = $1; }
 			;
 

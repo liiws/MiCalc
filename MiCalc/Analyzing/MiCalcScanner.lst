@@ -4,7 +4,7 @@
 // ==========================================================================
 //  Version:  1.2.1
 //  Machine:  LGT-PC
-//  DateTime: 13.10.2013 13:23:46
+//  DateTime: 02.12.2013 23:16:22
 //  UserName: lgt
 // ==========================================================================
 
@@ -17,10 +17,9 @@
 
 //base
 D		[0-9]
-//AZ		[a-z]
-//Name	{AZ}+
-//Name	{AZ}+{D}*
-Number	^({D}+\.?{D}*|\.{D}+)([e]{D}+)?[a-z]*$
+Number	({D}+\.?{D}*|\.{D}+)([e]{D}+)?[a-z]*
+NumberBin	[01]+b
+NumberHex	[0-9a-f]+h
 //whitespace
 Space		[\t\s]
 //operators
@@ -63,8 +62,6 @@ FuncLg		"lg"
 FuncExp		"exp"
 FuncSqrt	"sqrt"
 
-//AnyOther	.+
-
 
 
 // The states into which this FSA can pass.
@@ -79,8 +76,13 @@ FuncSqrt	"sqrt"
 //{Name}		{ yylval.String = yytext; return (int) Tokens.NAME; }
 {Number}	{ yylval.String = yytext; return (int) Tokens.NUMBER; }
 //^^^^^^
-// Error: Symbols '^' and '$' can only occur at the ends of patterns
-// -----------------------------------------------------------------
+// Warning: This pattern always overrides "{NumberBin}" 
+// -----------------------------------------------------
+{NumberBin}	{ yylval.String = yytext; return (int) Tokens.NUMBERBIN; }
+//^^^^^^^^^
+// Warning: This pattern always overridden by "{Number}" 
+// ------------------------------------------------------
+{NumberHex}	{ yylval.String = yytext; return (int) Tokens.NUMBERHEX; }
 
 // Remove whitespaces.
 {Space}+	{ ; }
@@ -123,7 +125,5 @@ FuncSqrt	"sqrt"
 {FuncLg}	{ return (int) Tokens.FUNC_LG; }
 {FuncExp}	{ return (int) Tokens.FUNC_EXP; }
 {FuncSqrt}	{ return (int) Tokens.FUNC_SQRT; }
-
-//{AnyOther}	{ yyerror(string.Empty, null); return (int) Tokens.ANYOTHER; }
 // ==========================================================================
 

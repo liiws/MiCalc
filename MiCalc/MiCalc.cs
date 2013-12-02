@@ -93,6 +93,7 @@ namespace MiCalc
 
 			// restore calculation expression
 			rtbExpression.Text = Settings.Settings.GetCalculationExpression();
+			CalcResult();
 		}
 
 		private void rtbExpression_TextChanged(object sender, EventArgs e)

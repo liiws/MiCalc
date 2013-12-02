@@ -67,12 +67,25 @@ namespace MiCalc.Runtime
 			// number
 			if (Number != null)
 			{
-				var re = new Regex(@"^([0-9]+\.?[0-9]*|\.[0-9]+)([e][0-9]+)?$", RegexOptions.IgnoreCase);
-				if (!re.IsMatch(Number))
+				var reBin = new Regex(@"^[01]+b$", RegexOptions.IgnoreCase);
+				var reHex = new Regex(@"^[0-9a-z]+h$", RegexOptions.IgnoreCase);
+				var reDec = new Regex(@"^([0-9]+\.?[0-9]*|\.[0-9]+)([e][0-9]+)?$", RegexOptions.IgnoreCase);
+				if (reBin.IsMatch(Number))
+				{
+					result = CalcHelper.ParseNumberBin(Number.Substring(0, Number.Length - 1));
+				}
+				else if (reHex.IsMatch(Number))
+				{
+					result = CalcHelper.ParseNumberHex(Number.Substring(0, Number.Length - 1));
+				}
+				else if (reDec.IsMatch(Number))
+				{
+					result = CalcHelper.ParseNumber(Number);
+				}
+				else
 				{
 					throw new Exception("Wrong number: " +  Number);
 				}
-				result = CalcHelper.ParseNumber(Number);
 			}
 
 			// operation

@@ -13,7 +13,7 @@ namespace MiCalc.Tests
 
 		private double GetResult(string expression, bool isRadians = false, bool isHideDigits = false)
 		{
-			return double.Parse(GetResultAsBigFloat(expression, isRadians, isHideDigits).ToString());
+			return double.Parse(MiCalc.Runtime.CalcHelper.GetAsDecimal(GetResultAsBigFloat(expression, isRadians, isHideDigits)));
 		}
 
 		private BigFloat GetResultAsBigFloat(string expression, bool isRadians = false, bool isHideDigits = false)
@@ -46,11 +46,35 @@ namespace MiCalc.Tests
 		}
 
 		[TestMethod]
+		public void NumberExp()
+		{
+			var input = "123e1";
+			var result = GetResult(input);
+			Assert.AreEqual(result, 1230);
+		}
+
+		[TestMethod]
 		public void NegativeNumber()
 		{
 			var input = "-123";
 			var result = GetResult(input);
 			Assert.AreEqual(result, -123);
+		}
+
+		[TestMethod]
+		public void NumberBin()
+		{
+			var input = "11b";
+			var result = GetResult(input);
+			Assert.AreEqual(result, 3);
+		}
+
+		[TestMethod]
+		public void NumberHex()
+		{
+			var input = "1Fh";
+			var result = GetResult(input);
+			Assert.AreEqual(result, 15+16);
 		}
 
 		[TestMethod]
