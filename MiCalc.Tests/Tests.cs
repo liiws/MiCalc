@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Text;
+using System.Threading;
 using BigNum;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -9,6 +11,14 @@ namespace MiCalc.Tests
 	public class UnitTest1
 	{
 		private double _maxError = 1.0e-10;
+
+
+
+		public UnitTest1()
+		{
+			Program.SetCultures();
+		}
+
 
 
 		private double GetResult(string expression, bool isRadians = false, bool isHideDigits = false)
@@ -43,6 +53,14 @@ namespace MiCalc.Tests
 			var input = "123";
 			var result = GetResult(input);
 			Assert.AreEqual(result, 123);
+		}
+
+		[TestMethod]
+		public void NumberFloat()
+		{
+			var input = "0.5";
+			var result = GetResult(input);
+			Assert.AreEqual(result, 0.5);
 		}
 
 		[TestMethod]

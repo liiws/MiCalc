@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Numbers", System.Windows.Forms.HorizontalAlignment.Center);
-			System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Operators", System.Windows.Forms.HorizontalAlignment.Center);
+			System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Operators in precedence order", System.Windows.Forms.HorizontalAlignment.Center);
 			System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("Constants", System.Windows.Forms.HorizontalAlignment.Center);
 			System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("Functions", System.Windows.Forms.HorizontalAlignment.Center);
 			System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
@@ -58,7 +58,7 @@
             "Bitwise NOT (64 bit)"}, -1);
 			System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem(new string[] {
             "&",
-            "Bitwise & (64 bit)"}, -1);
+            "Bitwise AND (64 bit)"}, -1);
 			System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem(new string[] {
             ":",
             "Bitwise XOR (64 bit)"}, -1);
@@ -141,7 +141,7 @@
 			listViewGroup1.Header = "Numbers";
 			listViewGroup1.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
 			listViewGroup1.Name = "lvgNumbers";
-			listViewGroup2.Header = "Operators";
+			listViewGroup2.Header = "Operators in precedence order";
 			listViewGroup2.HeaderAlignment = System.Windows.Forms.HorizontalAlignment.Center;
 			listViewGroup2.Name = "lvgOperators";
 			listViewGroup3.Header = "Constants";
