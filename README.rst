@@ -1,26 +1,26 @@
 ========
-Описание
+Overview
 ========
 
-Калькулятор высокой точности.
+High-precision calculator.
 
-Возможности:
+Features:
 
-- запись выражения в строку;
-- вывод в обычном, научном, шестнадцатеричном и двоичном режимах;
-- поддержка побитовых и тригонометрических функций.
+- string expression;
+- result output in usual, science, hexadecimal and binary mode;
+- support of bitwise operators and trigonometry functions.
 
 |
 .. image:: https://bitbucket.org/liiws/micalc/raw/da9c635ac3d1eda7ecda2620bd047fb15fa262b3/_src/MiCalc.png
 
 ========
-Требования
+Requirements
 ========
 
 .NET Framework 4.5.
 
 ========
-Скачать
+Download
 ========
 
-`MiCalc.zip <https://bitbucket.org/liiws/micalc/downloads/MiCalc.zip>`_ (114 KB).
+`MiCalc.zip <https://bitbucket.org/liiws/micalc/downloads/MiCalc.zip>`_ (0.1 MB).
