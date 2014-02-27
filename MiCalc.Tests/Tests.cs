@@ -700,6 +700,15 @@ namespace MiCalc.Tests
 		}
 
 		[TestMethod]
+		public void GetAsDecimal9()
+		{
+			var input = "1/2000";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsDecimal(result);
+			Assert.AreEqual("0.0005", s);
+		}
+
+		[TestMethod]
 		public void GetAsScience1()
 		{
 			var input = "123";
@@ -751,6 +760,15 @@ namespace MiCalc.Tests
 			var result = GetResultAsBigFloat(input);
 			var s = Runtime.CalcHelper.GetAsScience(result);
 			Assert.AreEqual("-1.23e-1", s);
+		}
+
+		[TestMethod]
+		public void GetAsScience7()
+		{
+			var input = "1/2000";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("5e-4", s);
 		}
 
 		[TestMethod]

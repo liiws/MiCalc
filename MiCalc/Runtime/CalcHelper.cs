@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BigNum;
 
 namespace MiCalc.Runtime
@@ -425,46 +426,113 @@ namespace MiCalc.Runtime
 		{
 			try
 			{
+				// ex1 = "-12.34e-56"
+				// ex2 = "-0.34e-56"
+
 				var s = n.ToString().ToLower().Replace(",", string.Empty);
 				var posE = s.IndexOf('e');
 				if (posE != -1)
 				{
-					var posPoint = s.IndexOf('.');
-					if (posPoint != -1)
+					// ex1 = "-12.34"
+					// ex2 = "-0.34"
+					var stringBeforeE = s.Substring(0, posE);
+
+					// ex1 = "-56"
+					// ex2 = "-56"
+					var stringAfterE = s.Substring(posE + 1);
+
+					int exp;
+					if (int.TryParse(stringAfterE, out exp))
 					{
-						var digitsAfterPoint = posE - posPoint - 1;
-						var stringAfterE = s.Substring(posE + 1);
-						long exp;
-						if (long.TryParse(stringAfterE, out exp))
+						// now:
+						// ex1 = exp = -56
+						// ex2 = exp = -56
+
+						string mainPartBeforePoint;
+						string mainPartAfterPoint;
+
+						var posPoint = stringBeforeE.IndexOf('.');
+						if (posPoint != -1)
 						{
-							if (exp > 0)
+							// ex1 = "-12"
+							// ex2 = "-0"
+							mainPartBeforePoint = stringBeforeE.Substring(0, posPoint);
+
+							// ex1 = "34"
+							// ex2 = "34"
+							mainPartAfterPoint = stringBeforeE.Substring(posPoint + 1);
+						}
+						else
+						{
+							mainPartBeforePoint = stringBeforeE;
+							mainPartAfterPoint = string.Empty;
+						}
+
+						// remove leading 0 in mainPartBeforePoint (can be safely removed without affecting "exp")
+						while (mainPartBeforePoint.StartsWith("0"))
+						{
+							mainPartBeforePoint = mainPartBeforePoint.Substring(1);
+						}
+						while (mainPartBeforePoint.StartsWith("-0"))
+						{
+							mainPartBeforePoint = "-" + mainPartBeforePoint.Substring(2);
+						}
+						// mainPartBeforePoint:
+						// ex1 = "-12"
+						// ex2 = "-"
+						
+						// merge main parts
+						exp -= mainPartAfterPoint.Length;
+						mainPartBeforePoint += mainPartAfterPoint;
+						mainPartAfterPoint = string.Empty;
+
+						// now we have only two things: "mainPartBeforePoint" and "exp"
+						// ex1: mainPartBeforePoint = "-1234", exp = -58
+						// ex2: mainPartBeforePoint = "-34", exp = -58
+
+						// remove leading 0 because they could be in "mainPartAfterPoint" (and if "mainPartBeforePoint" was empty)
+						while (mainPartBeforePoint.StartsWith("0"))
+						{
+							mainPartBeforePoint = mainPartBeforePoint.Substring(1);
+						}
+						while (mainPartBeforePoint.StartsWith("-0"))
+						{
+							mainPartBeforePoint = "-" + mainPartBeforePoint.Substring(2);
+						}
+
+						// remove ending 0
+						while (mainPartBeforePoint.EndsWith("0"))
+						{
+							mainPartBeforePoint = mainPartBeforePoint.Substring(0, mainPartBeforePoint.Length - 1);
+						}
+
+						// move point
+						if (exp > 0)
+						{
+							s = mainPartBeforePoint + new string('0', exp);
+						}
+						else if (exp < 0)
+						{
+							exp = -exp;
+							s = mainPartBeforePoint;
+							var sign = s.StartsWith("-") ? "-" : string.Empty;
+							s = s.StartsWith("-") ? s.Substring(1) : s;
+							if (exp < s.Length)
 							{
-								if (exp > digitsAfterPoint)
-								{
-									// ex. 1.23e4
-									s = s.Substring(0, posPoint) + s.Substring(posPoint + 1, digitsAfterPoint) + "e" + (exp - digitsAfterPoint).ToString();
-									// = 123e2
-								}
-								else if (exp == digitsAfterPoint)
-								{
-									// ex. 1.23e2
-									s = s.Substring(0, posPoint) + s.Substring(posPoint + 1, digitsAfterPoint);
-									// = 123
-								}
-								else
-								{
-									// ex. 1.23e1
-									s = (s.Substring(0, posPoint) + s.Substring(posPoint + 1, digitsAfterPoint)).Insert(posPoint + (int)exp, ".");
-									// = 12.3
-								}
+								s = sign + s.Substring(0, s.Length - exp) + "." + s.Substring(s.Length - exp);
+							}
+							else if (exp > s.Length)
+							{
+								s = sign + "0." + new string('0', exp - s.Length) + s;
 							}
 							else
 							{
-								// exp < 0
-
-								// may be will implement later
-								s = s;
+								s = sign + "0." + s;
 							}
+						}
+						else
+						{
+							s = mainPartBeforePoint;
 						}
 					}
 				}
