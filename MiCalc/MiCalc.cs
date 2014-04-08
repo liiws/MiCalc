@@ -19,8 +19,6 @@ namespace MiCalc
 		private Color _fgColorError = Color.FromArgb(255, 32, 32);
 
 
-		private int _minWidth = 400;
-
 		private bool _isWindowMoving = false;
 		private int _movingX;
 		private int _movingY;
@@ -29,8 +27,6 @@ namespace MiCalc
 		public fMain()
 		{
 			InitializeComponent();
-
-			Settings.Settings.LoadSettings();
 		}
 
 		private void fMain_Load(object sender, EventArgs e)
@@ -58,22 +54,7 @@ namespace MiCalc
 				ubHideDigits.Image = Resources.icon_hide_digits.ToBitmap();
 			}
 
-			// hide caption
-			ControlBox = false;
-			Text = string.Empty;
-
-			// restore window position
-			Location = Settings.Settings.GetWindowPosition();
-
-			// restore window size
-			Size = new Size(Settings.Settings.GetWindowSize().Width, Size.Height);
-
-			// set form size limits
-			var minSize = new Size(_minWidth, Size.Height);
-			var maxSize = new Size(int.MaxValue, Size.Height);
-			MinimumSize = minSize;
-			MaximumSize = maxSize;
-
+			// set topmost and icon
 			SetOnTop(Settings.Settings.GetAlwaysOnTop());
 
 			// tooltips
