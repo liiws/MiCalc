@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MiCalc")]
-[assembly: AssemblyCopyright("Copyright © 2013 Alexey V. Grishin")]
+[assembly: AssemblyCopyright("Copyright © 2013-2014 Alexey V. Grishin")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
