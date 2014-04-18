@@ -772,6 +772,33 @@ namespace MiCalc.Tests
 		}
 
 		[TestMethod]
+		public void GetAsScience8()
+		{
+			var input = "1";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("1e0.0", s);
+		}
+
+		[TestMethod]
+		public void GetAsScience9()
+		{
+			var input = "-1";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("-1e0.0", s);
+		}
+
+		[TestMethod]
+		public void GetAsScience10()
+		{
+			var input = "10";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsScience(result);
+			Assert.AreEqual("1e1", s);
+		}
+
+		[TestMethod]
 		public void GetAsHex1()
 		{
 			var input = "2^64-1";

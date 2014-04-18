@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Deployment.Application;
 using System.Linq;
 using BigNum;
 
@@ -20,6 +21,7 @@ namespace MiCalc.Runtime
 		private static BigInt _nLongUnsignedMaxInt = new BigInt("18446744073709551615", _precisionSpec);
 		private static BigFloat _nLongSignedMin = new BigFloat("-9223372036854775808", _precisionSpec);
 		private static BigInt _nLongUnsignedMaxPlusOne = new BigInt("18446744073709551616", _precisionSpec);
+		private static BigFloat _nFloorError = new BigFloat("1e-240", _precisionSpec);
 		private static BigInt _nLongZero = new BigInt("0", _precisionSpec);
 
 
@@ -282,14 +284,48 @@ namespace MiCalc.Runtime
 
 		public static BigFloat Floor(BigFloat n)
 		{
-			if (n.LessThan(_zero) && BigFloat.FPart(n).LessThan(_zero))
+			BigFloat ret;
+			var fMain = BigFloat.Floor(n);
+			var fPart = BigFloat.FPart(n);
+
+			if (fPart.IsZero())
 			{
-				return BigFloat.Floor(n) - _one;
+				ret = fMain;
+			}
+			else if (fPart.LessThan(_zero) && (fPart + _nFloorError).GreaterThan(_zero))
+			{
+				if (n.GreaterThan(_zero))
+				{
+					throw new TrustNotGrantedException("Not tested. Contact author with you expression!");
+					ret = fMain + _one;
+				}
+				else
+				{
+					ret = fMain;
+				}
+			}
+			else if (fPart.LessThan(_one) && (fPart + _nFloorError).GreaterThan(_one))
+			{
+				if (n.GreaterThan(_zero))
+				{
+					ret = fMain + _one;
+				}
+				else
+				{
+					throw new TrustNotGrantedException("Not tested. Contact author with you expression!");
+					ret = fMain;
+				}
+			}
+			else if (fPart.GreaterThan(_zero))
+			{
+				ret = fMain;
 			}
 			else
 			{
-				return BigFloat.Floor(n);
+				ret = fMain - _one;
 			}
+
+			return ret;
 		}
 
 		public static BigFloat Ceil(BigFloat n)
