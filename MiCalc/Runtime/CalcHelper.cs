@@ -21,7 +21,7 @@ namespace MiCalc.Runtime
 		private static BigInt _nLongUnsignedMaxInt = new BigInt("18446744073709551615", _precisionSpec);
 		private static BigFloat _nLongSignedMin = new BigFloat("-9223372036854775808", _precisionSpec);
 		private static BigInt _nLongUnsignedMaxPlusOne = new BigInt("18446744073709551616", _precisionSpec);
-		private static BigFloat _nFloorError = new BigFloat("1e-240", _precisionSpec);
+		private static BigFloat _nFloorError = new BigFloat("1e-221", _precisionSpec);
 		private static BigInt _nLongZero = new BigInt("0", _precisionSpec);
 
 
@@ -61,24 +61,24 @@ namespace MiCalc.Runtime
 
 		public static BigFloat ChangeSign(BigFloat n)
 		{
-			var n1 = new BigFloat(n);
+			var n1 = new BigFloat(n, _precisionSpec);
 			n1.Sign = !n1.Sign;
 			return n1;
 		}
 
 		public static BigFloat GetPi()
 		{
-			return new BigFloat(_pi);
+			return new BigFloat(_pi, _precisionSpec);
 		}
 
 		public static BigFloat GetE()
 		{
-			return new BigFloat(_e);
+			return new BigFloat(_e, _precisionSpec);
 		}
 
 		public static BigFloat GetZero()
 		{
-			return new BigFloat(_zero);
+			return new BigFloat(_zero, _precisionSpec);
 		}
 
 		public static BigFloat Add(BigFloat n1, BigFloat n2)
@@ -272,7 +272,32 @@ namespace MiCalc.Runtime
 
 		public static BigFloat Pow(BigFloat n1, BigFloat n2)
 		{
-			return BigFloat.Pow(n1, n2);
+			// 1) n1 is positive - value can be calculated
+			// 2) n1 is negative, n2 is integer - value can be calculated
+			// 3) n1 is negative, n2 is not integer - value can't be calculated 'cos it imagine
+			// Situations 1 and 3 works ok, but 2 doesn't with used calc library
+
+			var n = BigFloat.Pow(n1, n2);
+			if (n.IsSpecialValue && n.SpecialValue == BigFloat.SpecialValueType.NAN && n1.Sign && IsInteger(n2))
+			{
+				var n1Positive = new BigFloat(n1, _precisionSpec);
+				n1Positive.Sign = false;
+				n = BigFloat.Pow(n1Positive, n2);
+				// if n2 is odd then result will be negative, else positive
+				var mod = Mod(n2, new BigFloat(2, _precisionSpec));
+				mod = Round(mod);
+				mod.Sign = false;
+				n.Sign = !mod.LessThan(_nFloorError);
+			}
+			return n;
+		}
+
+		private static bool IsInteger(BigFloat n)
+		{
+			var nRound = Round(n);
+			var dif = nRound - n;
+			dif.Sign = false;
+			return dif.LessThan(_nFloorError);
 		}
 
 		public static BigFloat Fac(BigFloat n)
@@ -349,6 +374,13 @@ namespace MiCalc.Runtime
 			else if (n.GreaterThan(_zero))
 			{
 				// n > 0
+
+				if (fPart.GreaterThan(BigFloat.FPart(n + _nFloorError)))
+				{
+					floored = Floor(n + _nFloorError);
+					fPart = BigFloat.FPart(n + _nFloorError);
+				}
+
 				return fPart == _half || fPart.GreaterThan(_half) ? floored + _one : floored;
 			}
 			else
@@ -445,7 +477,7 @@ namespace MiCalc.Runtime
 		/// <returns></returns>
 		private static BigFloat GetRadiansFromCurrent(BigFloat n)
 		{
-			return IsRadians ? new BigFloat(n) : GetPi()*n/_n180;
+			return IsRadians ? new BigFloat(n, _precisionSpec) : GetPi()*n/_n180;
 		}
 
 		/// <summary>
@@ -455,7 +487,7 @@ namespace MiCalc.Runtime
 		/// <returns></returns>
 		private static BigFloat GetCurrentFromRadians(BigFloat n)
 		{
-			return IsRadians ? new BigFloat(n) : _n180*n/GetPi();
+			return IsRadians ? new BigFloat(n, _precisionSpec) : _n180*n/GetPi();
 		}
 
 		public static string GetAsDecimal(BigFloat n)
@@ -636,7 +668,8 @@ namespace MiCalc.Runtime
 				else if (n.Sign == false)
 				{
 					// >= 0
-					var floored = BigFloat.ConvertToInt(Round(n), _precisionSpec, false);
+					//var floored = BigFloat.ConvertToInt(Round(n), _precisionSpec, false);
+					var floored = BigFloat.ConvertToInt(Floor(n), _precisionSpec, false);
 					result = floored.ToString(16);
 				}
 				else

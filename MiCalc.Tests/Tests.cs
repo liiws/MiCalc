@@ -352,6 +352,14 @@ namespace MiCalc.Tests
 		}
 
 		[TestMethod]
+		public void Floor7()
+		{
+			var input = "floor(2^64-1)";
+			var result = GetResult(input);
+			Assert.AreEqual(18446744073709551615, result);
+		}
+
+		[TestMethod]
 		public void Ceil1()
 		{
 			var input = "ceil(2.3)";
@@ -445,6 +453,14 @@ namespace MiCalc.Tests
 			var input = "round(-1)";
 			var result = GetResult(input);
 			Assert.AreEqual(-1.0, result);
+		}
+
+		[TestMethod]
+		public void Round7()
+		{
+			var input = "round(1^1)";
+			var result = GetResult(input);
+			Assert.AreEqual(1.0, result);
 		}
 
 		[TestMethod]
@@ -823,6 +839,15 @@ namespace MiCalc.Tests
 			var result = GetResultAsBigFloat(input);
 			var s = Runtime.CalcHelper.GetAsHex(result);
 			Assert.AreEqual("FFFFFFFF FFFFFFFF", s);
+		}
+
+		[TestMethod]
+		public void GetAsHex4()
+		{
+			var input = "1^1";
+			var result = GetResultAsBigFloat(input);
+			var s = Runtime.CalcHelper.GetAsHex(result);
+			Assert.AreEqual("1", s);
 		}
 
 		[TestMethod]
