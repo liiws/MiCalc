@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using System.Threading;
 using BigNum;
@@ -40,6 +41,11 @@ namespace MiCalc.Tests
 				var scanner = new Analyzing.Scanner(ms);
 				var parser = new Analyzing.Parser(scanner);
 				parser.Parse();
+
+				if (scanner.ErrorPos != null)
+				{
+					throw new Exception("scanner.ErrorPos != null");
+				}
 
 				var result = parser.expression.Calc();
 
@@ -875,6 +881,44 @@ namespace MiCalc.Tests
 			var result = GetResultAsBigFloat(input);
 			var s = Runtime.CalcHelper.GetAsBin(result);
 			Assert.AreEqual("11111111 11111111 11111111 11111111 11111111 11111111 11111111 11111111", s);
+		}
+
+		[TestMethod]
+		public void Error1()
+		{
+			var input = "qw";
+
+			using (var ms = new MemoryStream())
+			{
+				var data = Encoding.UTF8.GetBytes(input);
+				ms.Write(data, 0, input.Length);
+				ms.Position = 0L;
+
+				var scanner = new Analyzing.Scanner(ms);
+				var parser = new Analyzing.Parser(scanner);
+				parser.Parse();
+
+				Assert.IsNotNull(scanner.ErrorPos);
+			}
+		}
+
+		[TestMethod]
+		public void Error2()
+		{
+			var input = "qwe";
+
+			using (var ms = new MemoryStream())
+			{
+				var data = Encoding.UTF8.GetBytes(input);
+				ms.Write(data, 0, input.Length);
+				ms.Position = 0L;
+
+				var scanner = new Analyzing.Scanner(ms);
+				var parser = new Analyzing.Parser(scanner);
+				parser.Parse();
+
+				Assert.IsNotNull(scanner.ErrorPos);
+			}
 		}
 	}
 }

@@ -10,18 +10,18 @@ namespace MiCalc.Helpers
 {
 	static class AppHelper
 	{
-		public static CultureInfo DisplayCulture = new CultureInfo("en-US")
+		public static CultureInfo DisplayCulture;
+
+		static AppHelper()
 		{
-			NumberFormat =
-			{
-				CurrencyDecimalSeparator = ".",
-				CurrencyGroupSeparator = " ",
-				NumberDecimalSeparator = ".",
-				NumberGroupSeparator = " ",
-				PercentDecimalSeparator = ".",
-				PercentGroupSeparator = ""
-			}
-		};
+			DisplayCulture = new CultureInfo("en-US");
+			DisplayCulture.NumberFormat.NumberDecimalSeparator = ".";
+			DisplayCulture.NumberFormat.PercentDecimalSeparator = ".";
+			DisplayCulture.NumberFormat.CurrencyDecimalSeparator = ".";
+			DisplayCulture.NumberFormat.NumberGroupSeparator = string.Empty;
+			DisplayCulture.NumberFormat.PercentGroupSeparator = string.Empty;
+			DisplayCulture.NumberFormat.CurrencyGroupSeparator = string.Empty;
+		}
 
 		public static void SetProcessCulture()
 		{
@@ -31,7 +31,6 @@ namespace MiCalc.Helpers
 
 
 		#region Assembly Attribute Accessors
-
 		public static string AssemblyTitle
 		{
 			get
@@ -56,33 +55,7 @@ namespace MiCalc.Helpers
 				return Assembly.GetExecutingAssembly().GetName().Version.ToString();
 			}
 		}
-
-		public static string AssemblyDescription
-		{
-			get
-			{
-				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-				if (attributes.Length == 0)
-				{
-					return "";
-				}
-				return ((AssemblyDescriptionAttribute)attributes[0]).Description;
-			}
-		}
-
-		public static string AssemblyProduct
-		{
-			get
-			{
-				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-				if (attributes.Length == 0)
-				{
-					return "";
-				}
-				return ((AssemblyProductAttribute)attributes[0]).Product;
-			}
-		}
-
+		
 		public static string AssemblyCopyright
 		{
 			get
@@ -96,18 +69,6 @@ namespace MiCalc.Helpers
 			}
 		}
 
-		public static string AssemblyCompany
-		{
-			get
-			{
-				object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-				if (attributes.Length == 0)
-				{
-					return "";
-				}
-				return ((AssemblyCompanyAttribute)attributes[0]).Company;
-			}
-		}
 		#endregion
 
 	}

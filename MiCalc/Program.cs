@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
 using System.Reflection;
 using System.Resources;
 using System.Threading;
 using System.Windows.Forms;
+using MiCalc.Helpers;
 
 namespace MiCalc
 {
@@ -33,6 +35,7 @@ namespace MiCalc
 			Application.Run(f);
 		}
 
+		[SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
 		private static Assembly CurrentDomainOnAssemblyResolve(object sender, ResolveEventArgs args)
 		{
 			var requestedAssemblyName = new AssemblyName(args.Name).Name.Replace(".", "_");
@@ -58,16 +61,7 @@ namespace MiCalc
 
 		public static void SetCultures()
 		{
-			var ci = new CultureInfo("en-US");
-			ci.NumberFormat.NumberDecimalSeparator = ".";
-			ci.NumberFormat.PercentDecimalSeparator = ".";
-			ci.NumberFormat.CurrencyDecimalSeparator = ".";
-			ci.NumberFormat.NumberGroupSeparator = string.Empty;
-			ci.NumberFormat.PercentGroupSeparator = string.Empty;
-			ci.NumberFormat.CurrencyGroupSeparator = string.Empty;
-
-			Thread.CurrentThread.CurrentCulture = ci;
-			Thread.CurrentThread.CurrentUICulture = ci;
+			AppHelper.SetProcessCulture();
 		}
 
 		private static void SetWindowDumensions(Form f)

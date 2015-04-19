@@ -6,11 +6,12 @@
 
 //base
 D		[0-9]
-Number	({D}+\.?{D}*|\.{D}+)([e]{D}+)?[a-z]*
+Number	({D}+\.?{D}*|\.{D}+)(e{D}+)?[a-z]*
 NumberBin	[01]+b
 NumberHex	[0-9a-f]+h
 //whitespace
-Space		[\t\s]
+Space		[ \t]
+//[\t\s]
 //operators
 OpAdd		"+"
 OpSub		"-"
@@ -51,6 +52,7 @@ FuncLg		"lg"
 FuncExp		"exp"
 FuncSqrt	"sqrt"
 
+AnyChar		.
 
 
 // The states into which this FSA can pass.
@@ -62,13 +64,12 @@ FuncSqrt	"sqrt"
 // Start of Rules
 //
 
-//{Name}		{ yylval.String = yytext; return (int) Tokens.NAME; }
+// Remove whitespaces.
+{Space}		{ ; }
+
 {NumberBin}	{ yylval.String = yytext; return (int) Tokens.NUMBERBIN; }
 {NumberHex}	{ yylval.String = yytext; return (int) Tokens.NUMBERHEX; }
 {Number}	{ yylval.String = yytext; return (int) Tokens.NUMBER; }
-
-// Remove whitespaces.
-{Space}+	{ ; }
 
 {OpAdd}		{ return (int) Tokens.OP_ADD; }
 {OpSub}		{ return (int) Tokens.OP_SUB; }
@@ -108,3 +109,11 @@ FuncSqrt	"sqrt"
 {FuncLg}	{ return (int) Tokens.FUNC_LG; }
 {FuncExp}	{ return (int) Tokens.FUNC_EXP; }
 {FuncSqrt}	{ return (int) Tokens.FUNC_SQRT; }
+
+// Other chars (disallowed)
+//{AnyChar}	{ yyerror("Unknown character"); }
+//{AnyChar}	{ ; }
+//{AnyChar}	{ return (int) Tokens.WRONG_CHAR; }
+{AnyChar}	{ /*if (yytext == " ") { break; }*/ yyerror("Unknown character"); }
+
+
