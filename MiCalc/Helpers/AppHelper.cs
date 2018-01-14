@@ -27,6 +27,8 @@ namespace MiCalc.Helpers
 		{
 			Thread.CurrentThread.CurrentCulture = DisplayCulture;
 			Thread.CurrentThread.CurrentUICulture = DisplayCulture;
+			CultureInfo.DefaultThreadCurrentCulture = DisplayCulture;
+			CultureInfo.DefaultThreadCurrentUICulture = DisplayCulture;
 		}
 
 
