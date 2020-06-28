@@ -8,7 +8,7 @@ Features:
 - result output in usual, science, hexadecimal and binary mode;
 - support of bitwise operators and trigonometry functions.
 
-![MiCalc.png](https://bitbucket.org/liiws/micalc/raw/da9c635ac3d1eda7ecda2620bd047fb15fa262b3/_src/MiCalc.png)
+![MiCalc.png](_src/MiCalc.png)
 
 # Requirements
 
