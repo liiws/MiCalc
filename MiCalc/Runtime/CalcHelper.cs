@@ -548,7 +548,13 @@ namespace MiCalc.Runtime
 						// mainPartBeforePoint:
 						// ex1 = "-12"
 						// ex2 = "-"
-						
+
+						// remove ending 0 in mainPartAfterPoint
+						while (mainPartAfterPoint.EndsWith("0"))
+						{
+							mainPartAfterPoint = mainPartAfterPoint.Substring(0, mainPartAfterPoint.Length - 1);
+						}
+
 						// merge main parts
 						exp -= mainPartAfterPoint.Length;
 						mainPartBeforePoint += mainPartAfterPoint;
@@ -566,12 +572,6 @@ namespace MiCalc.Runtime
 						while (mainPartBeforePoint.StartsWith("-0"))
 						{
 							mainPartBeforePoint = "-" + mainPartBeforePoint.Substring(2);
-						}
-
-						// remove ending 0
-						while (mainPartBeforePoint.EndsWith("0"))
-						{
-							mainPartBeforePoint = mainPartBeforePoint.Substring(0, mainPartBeforePoint.Length - 1);
 						}
 
 						// move point
@@ -592,10 +592,20 @@ namespace MiCalc.Runtime
 							else if (exp > s.Length)
 							{
 								s = sign + "0." + new string('0', exp - s.Length) + s;
+								// remove ending 0 after point
+								while (s.EndsWith("0"))
+								{
+									s = s.Substring(0, s.Length - 1);
+								}
 							}
 							else
 							{
 								s = sign + "0." + s;
+								// remove ending 0 after point
+								while (s.EndsWith("0"))
+								{
+									s = s.Substring(0, s.Length - 1);
+								}
 							}
 						}
 						else

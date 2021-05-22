@@ -22,9 +22,14 @@ namespace MiCalc.Tests
 
 
 
+		private string GetResultAsString(string expression, bool isRadians = false, bool isHideDigits = false)
+		{
+			return MiCalc.Runtime.CalcHelper.GetAsDecimal(GetResultAsBigFloat(expression, isRadians, isHideDigits));
+		}
+
 		private double GetResult(string expression, bool isRadians = false, bool isHideDigits = false)
 		{
-			return double.Parse(MiCalc.Runtime.CalcHelper.GetAsDecimal(GetResultAsBigFloat(expression, isRadians, isHideDigits)));
+			return double.Parse(GetResultAsString(expression, isRadians, isHideDigits));
 		}
 
 		private BigFloat GetResultAsBigFloat(string expression, bool isRadians = false, bool isHideDigits = false)
@@ -163,6 +168,54 @@ namespace MiCalc.Tests
 			var input = "3/4";
 			var result = GetResult(input);
 			Assert.AreEqual(3f/4, result);
+		}
+
+		[TestMethod]
+		public void Div_1_10()
+		{
+			var input = "1/10";
+			var result = GetResult(input);
+			Assert.AreEqual(1d/10, result);
+		}
+
+		[TestMethod]
+		public void Div_1_100()
+		{
+			var input = "1/100";
+			var result = GetResult(input);
+			Assert.AreEqual(1d/100, result);
+		}
+
+		[TestMethod]
+		public void Div_1_1000()
+		{
+			var input = "1/1000";
+			var result = GetResult(input);
+			Assert.AreEqual(1d/1000, result);
+		}
+
+		[TestMethod]
+		public void Div_1_10000()
+		{
+			var input = "1/10000";
+			var result = GetResult(input);
+			Assert.AreEqual(1d/10000, result);
+		}
+
+		[TestMethod]
+		public void Div_1_100000()
+		{
+			var input = "1/100000";
+			var result = GetResult(input);
+			Assert.AreEqual(1d/100000, result);
+		}
+
+		[TestMethod]
+		public void Div_1_1000_Str()
+		{
+			var input = "1/1000";
+			var result = GetResultAsString(input);
+			Assert.AreEqual("0.001", result);
 		}
 
 		[TestMethod]
