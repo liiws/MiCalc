@@ -12,6 +12,8 @@ namespace MiCalc.Settings
 		private static string _configFilename = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "micalc.cfg");
 		private static InternalSettings _settingInstance = new InternalSettings();
 
+		public static readonly Point DefaultWndLocation = new Point(400, 400);
+		public static readonly Size DefaultWndSize = new Size(550, 0);
 
 		[Serializable]
 		public class InternalSettings
@@ -35,9 +37,9 @@ namespace MiCalc.Settings
 			}
 			catch
 			{
-                // default settings
-				_settingInstance.WndLocation = new Point(400, 400);
-				_settingInstance.WndSize = new Size(710, 0);
+				// default settings
+				_settingInstance.WndLocation = DefaultWndLocation;
+				_settingInstance.WndSize = DefaultWndSize;
 				_settingInstance.AlwaysOnTop = false;
 				_settingInstance.Expression = string.Empty;
 				_settingInstance.IsRadians = false;

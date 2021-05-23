@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Threading;
@@ -31,7 +32,7 @@ namespace MiCalc
 			Application.SetCompatibleTextRenderingDefault(false);
 
 			var f = new fMain();
-			SetWindowDumensions(f);
+			SetWindowDimensions(f);
 			Application.Run(f);
 		}
 
@@ -64,7 +65,7 @@ namespace MiCalc
 			AppHelper.SetProcessCulture();
 		}
 
-		private static void SetWindowDumensions(Form f)
+		private static void SetWindowDimensions(Form f)
 		{
 			// hide caption
 			f.ControlBox = false;
@@ -77,6 +78,9 @@ namespace MiCalc
 			// restore window size
 			f.Size = new Size(Settings.Settings.GetWindowSize().Width, f.Size.Height - SystemInformation.CaptionHeight);
 
+			// correct window position if it's outside the screen
+			FixWindowOutsidePosition(f);
+
 			// set form size limits
 			var minSize = new Size(_minWidth, f.Size.Height);
 			var maxSize = new Size(int.MaxValue, f.Size.Height);
@@ -84,6 +88,26 @@ namespace MiCalc
 			f.MaximumSize = maxSize;
 
 			f.TopMost = Settings.Settings.GetAlwaysOnTop();
+		}
+
+		private static void FixWindowOutsidePosition(Form f)
+		{
+			var isInsideAnyScreen = Screen.AllScreens.Any(IsInsideScreen);
+			if (!isInsideAnyScreen)
+			{
+				f.Location = new Point(Settings.Settings.DefaultWndLocation.X, Settings.Settings.DefaultWndLocation.Y);
+				f.Size = new Size(Settings.Settings.DefaultWndSize.Width, f.Size.Height);
+			}
+
+			bool IsInsideScreen(Screen screen)
+			{
+				return f.Left >= screen.WorkingArea.X
+					&& f.Top >= screen.WorkingArea.Y
+					&& f.Left + f.Width <= screen.WorkingArea.X + screen.WorkingArea.Width
+					&& f.Top + f.Height <= screen.WorkingArea.Y + screen.WorkingArea.Height;
+
+
+			}
 		}
 	}
 }
