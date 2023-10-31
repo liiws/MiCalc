@@ -16,4 +16,4 @@ Features:
 
 # Download
 
-[MiCalc.zip](https://bitbucket.org/liiws/micalc/downloads/MiCalc.zip) (0.1 MB).
+[MiCalc.zip](https://github.com/liiws/MiCalc/releases/download/1.0.3/MiCalc.zip) (0.1 MB).
